@@ -1,0 +1,42 @@
+* {
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 25px;
+    background-color: white;
+    padding: 15px;
+}
+
+body {
+    margin: 25px;
+    background-image: url(/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/images/kitchen.jpeg);
+
+}
+
+body h1 {
+    text-align: center;
+}
+
+.panelsAll {
+    border: solid 2px black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 25px;
+
+}
+
+.panel {
+    width: 25%;
+    height: auto;
+    border: solid 2px black;
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+}
