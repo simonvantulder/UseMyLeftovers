@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>dashboard</h1>
+    <a href="/logout">logout</a>
+
+
+    <div class="login column">
+        <h2>Find a Recipe</h2>
+        <form action="/find_dinner" method="post">
+            {%csrf_token%}
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" for="time">time</label>
+                <div>
+                    <input class="form-control" type="text" name="time">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" for="ingred1">ingredient 1</label>
+                <div>
+                    <input class="form-control" type="text" name="ingred1">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" for="ingred2">ingredient 2</label>
+                <div>
+                    <input class="form-control" type="text" name="ingred2">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label" for="ingred3">ingredient 3</label>
+                <div>
+                    <input class="form-control" type="text" name="ingred3">
+                </div>
+            </div>
+            
+            <button>Submit</button>
+        </form>
+        <div>
+
+            {{idea.instructions}}
+        </div>
+        <div>
+            <ul>
+                {%for ingredient in ideas%}
+                <li>
+                    {{ingredient.ingredient.name}} 
+                    {{ingredient.extra_comment}}
+                    {%if 0 < ingredient.measurements.0.quantity|add:"0"%}
+                        {%if 1 < ingredient.measurements.0.quantity|add:"0"%}
+                            {{ingredient.measurements.0.quantity}} 
+                        {%endif%}
+                    {%endif%}
+                    {{ingredient.measurements.0.unit.name}}
+
+                </li>
+                
+                {%endfor%}
+            </ul>
+            
+        </div>
+
+    </div>
+</body>
+</html>
