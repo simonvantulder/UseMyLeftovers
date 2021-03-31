@@ -12,11 +12,6 @@ def login_page(request):
 
 
 def dashboard(request):
-    # findByIngredients()
-    # findByIngredientsTasty(request.POST)
-    # print(findByIngredientsTasty())
-    # findRecipe()
-    # FindTags()
     
     return render (request, "dashboard.html")
 
@@ -35,8 +30,8 @@ def make_dinner(request):
     # print(idea)
     print(idea['results'])
     context = {
-        "ideas" : idea['results'][0]['sections'][0]['components'],
-        "idea" : idea['results'][0]
+        "ideas" : idea['results'][0]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
+        "recipe_num" : idea['results'][0] #holds instructions objcet
     
     }
     return render (request, "dashboard.html", context)

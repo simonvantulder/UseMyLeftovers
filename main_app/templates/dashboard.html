@@ -52,7 +52,7 @@
             <ul>
                 {%for recipe in ideas%} <!-- for loop prints ingredients in recipe dictionary-->
                 <li>
-                    {{recipe.ingredient.name}} <!-- recipe is a dict of ingredients and their measurements inside ideas-->
+                    {{recipe.ingredient.name}} <!-- recipe is a dict of ingredients and their measurements inside ideas list-->
                     {{recipe.extra_comment}}
                     {%if 0 < recipe.measurements.0.quantity|add:"0"%}
                         {%if 1 < recipe.measurements.0.quantity|add:"0"%}
