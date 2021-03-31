@@ -54,12 +54,16 @@
                 <li>
                     {{recipe.ingredient.name}} <!-- recipe is a dict of ingredients and their measurements inside ideas list-->
                     {{recipe.extra_comment}}
-                    {%if 0 < recipe.measurements.0.quantity|add:"0"%}
-                        {%if 1 < recipe.measurements.0.quantity|add:"0"%}
-                            {{recipe.measurements.0.quantity}} 
-                        {%endif%}
+
+                    {%if 0 < recipe.measurements.0.quantity|add:"0"%} <!-- displays only if quantity != 0 ie ingredient used as garnish or pinch of salt-->
+                        {{recipe.measurements.0.quantity}} 
                     {%endif%}
-                    {{recipe.measurements.0.unit.name}}
+
+                    {%if 1 < recipe.measurements.0.quantity|add:"0"%} <!-- displays plural or singular word form of the measurement ie 1 cup vs 2 cups of cheese-->
+                        {{recipe.measurements.0.unit.display_plural}}
+                    {% else %}
+                        {{recipe.measurements.0.unit.name}}
+                    {%endif%}
 
                 </li>
                 

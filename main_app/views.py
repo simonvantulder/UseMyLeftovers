@@ -31,7 +31,7 @@ def make_dinner(request):
     print(idea['results'])
     context = {
         "ideas" : idea['results'][0]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
-        "recipe_num" : idea['results'][0] #holds instructions objcet
+        "recipe_num" : idea['results'][0] #holds instructions object
     
     }
     return render (request, "dashboard.html", context)
