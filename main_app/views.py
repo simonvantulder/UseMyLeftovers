@@ -26,7 +26,6 @@ def find_dinner(request):
     # print(request.session["ideas"][1])
     print(findByIngredientsTasty(request.POST))
     # print(find_by_ingredients(request.POST))
-    # print("test")
 
     return redirect ("/make_dinner")
 
