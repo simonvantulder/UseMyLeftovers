@@ -15,27 +15,27 @@
         <h2>Find a Recipe</h2>
         <form action="/find_dinner" method="post">
             {%csrf_token%}
-            <div class="form-group row">
+            <div class="form-group row"> <!-- input of desired total time in minutes-->
                 <label class="col-sm-4 col-form-label" for="time">time</label>
                 <div>
                     <input class="form-control" type="text" name="time">
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row"> <!-- input first ingredient currently required-->
                 <label class="col-sm-4 col-form-label" for="ingred1">ingredient 1</label>
                 <div>
                     <input class="form-control" type="text" name="ingred1">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row"> <!-- input second ingredient currently required-->
                 <label class="col-sm-4 col-form-label" for="ingred2">ingredient 2</label>
                 <div>
                     <input class="form-control" type="text" name="ingred2">
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row"> <!-- input third ingredient currently required-->
                 <label class="col-sm-4 col-form-label" for="ingred3">ingredient 3</label>
                 <div>
                     <input class="form-control" type="text" name="ingred3">
@@ -46,20 +46,20 @@
         </form>
         <div>
 
-            {{idea.instructions}}
+            {{recipe_num.instructions}} <!-- currently printing instructions object working on getting to print individual steps in a list-->
         </div>
         <div>
             <ul>
-                {%for ingredient in ideas%}
+                {%for recipe in ideas%} <!-- for loop prints ingredients in recipe dictionary-->
                 <li>
-                    {{ingredient.ingredient.name}} 
-                    {{ingredient.extra_comment}}
-                    {%if 0 < ingredient.measurements.0.quantity|add:"0"%}
-                        {%if 1 < ingredient.measurements.0.quantity|add:"0"%}
-                            {{ingredient.measurements.0.quantity}} 
+                    {{recipe.ingredient.name}} <!-- recipe is a dict of ingredients and their measurements inside ideas list-->
+                    {{recipe.extra_comment}}
+                    {%if 0 < recipe.measurements.0.quantity|add:"0"%}
+                        {%if 1 < recipe.measurements.0.quantity|add:"0"%}
+                            {{recipe.measurements.0.quantity}} 
                         {%endif%}
                     {%endif%}
-                    {{ingredient.measurements.0.unit.name}}
+                    {{recipe.measurements.0.unit.name}}
 
                 </li>
                 
