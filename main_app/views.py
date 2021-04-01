@@ -41,6 +41,7 @@ def make_dinner(request):
         "cook_time" : idea['results'][0]['cook_time_minutes'], #total time on the stove and/or in the oven 
         "total_time" : idea['results'][0]['total_time_minutes'], #total time start to finish to make the recipe 
         "nutrition" : idea['results'][0]['nutrition'], #number of servings in the recipe 
+        "description" : idea['results'][0]['description'], #descripton of the recipe 
         "ratings" :  ratings #recipe rating 
 
     }
