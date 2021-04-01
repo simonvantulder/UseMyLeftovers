@@ -19,7 +19,7 @@ def dashboard(request):
 def find_dinner(request):
     request.session["ideas"] = findByIngredientsTasty(request.POST)
     # print(request.session["ideas"][1])
-    print(findByIngredientsTasty(request.POST))
+    # print(findByIngredientsTasty(request.POST))
     # print(find_by_ingredients(request.POST))
 
     return redirect ("/make_dinner")
@@ -27,11 +27,12 @@ def find_dinner(request):
 
 def make_dinner(request):
     idea = request.session['ideas']
-    # print(idea)
-    print(idea['results'])
+    print(idea['results'][0])
+    # print(idea['results'])
     context = {
         "ideas" : idea['results'][0]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
-        "recipe_num" : idea['results'][0] #holds instructions object
+        "recipe_num" : idea['results'][0], #holds all key value pairs 
+        "instructions" : idea['results'][0]['instructions'], #holds instructions object
     
     }
     return render (request, "dashboard.html", context)

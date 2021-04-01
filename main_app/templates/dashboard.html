@@ -46,7 +46,17 @@
         </form>
         <div>
 
-            {{recipe_num.instructions}} <!-- currently printing instructions object working on getting to print individual steps in a list-->
+            <p>
+                {{recipe_num.name}} <!-- print recipe name :) yum-->
+            </p>
+            <p>
+                {% for instruction in instructions %}
+                    <p>
+                        {{instruction.display_text}} <!-- loop through and print each instructions step -->
+                    </p>
+                {% endfor %}
+            </p>
+
         </div>
         <div>
             <ul>
