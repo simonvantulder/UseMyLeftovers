@@ -15,7 +15,7 @@ header {
 
 body {
     margin: 25px;
-    background-image: url(/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/images/kitchen.jpeg);
+    background-image: url(/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/img/kitchen.jpeg);
 
 }
 
@@ -24,7 +24,6 @@ body h1 {
 }
 
 .panelsAll {
-    /* border: solid 2px black; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
