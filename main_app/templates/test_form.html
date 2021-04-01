@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/style .css">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <title>Document</title>
+</head>
+<body>
+    
+        <header>
+            <button>Home</button>
+            <h1>Welcome {{ name }}</h1>
+            <span><button>Home</button><button>Logout</button></span>        
+        </header>
+    <div class="addSection">
+        <div  class="addFood">
+            <h2 class="find">Find a Recipe</h2>
+            <form action="/find_dinner" method="POST">
+                {%csrf_token%}
+
+                <div class="form-group row"> <!-- input of desired total time in minutes-->
+                    <label class="col-sm-4 col-form-label" for="time">How much time do you have?</label>
+                    <div>
+                        <input class="form-control" placeholder="(Minutes)" type="number" name="time" step='10' >
+                    </div>
+                </div>
+
+                <div class="form-group row"> <!-- input first ingredient currently required-->
+                    <label class="col-sm-4 col-form-label" for="ingred1">Choose a category</label>
+                    <div>
+                        <select required class="form-control" type="text" name="ingred1">
+                            <option class="form-control" disabled selected value="">Category</option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+
+                <fieldset class="form-group">
+                    <div id="ingredients" class="row"> 
+                        <legend class="col-form-label col-sm-3 pt-0"> Ingredients: <span class="add">+ </span></legend>
+                        <div class="col-sm-4">
+                                <div class="ingredient" id="div_1">
+                                    <input id="addItem" class="form-control" type="text" name="ingredient"><br>
+                                </div>
+                        </div>        
+                    </div>
+                </fieldset>
+
+                <button class="recipeButton">Get recipe recommendations!</button>
+            </form>
+        <div>
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            $('.add').click(function(){
+                var ingredient_sum = $('.ingredient').length;
+                var lastid = $(".ingredient:last").attr("id");
+                var split_id = lastid.split("_");
+                var nextindex = Number(split_id[1]) + 1; 
+                var max = 5;
+                if(ingredient_sum < max){
+                    $(".ingredient:last").after("<div class='ingredient' id='div_"+ nextindex +"'></div><br>");
+                    $("#div_" + nextindex).append("<input type='text' class='form-control' name='ingredient' id='txt_"+ nextindex +"'>&nbsp;<span id='remove_" + nextindex + "' class='remove'> Delete </span>");
+                }
+            });
+
+            $('.remove').css('cursor', 'pointer');
+
+            $('#ingredients').on('click','.remove',function(){
+                var id = this.id;
+                var split_id = id.split("_");
+                var deleteindex = split_id[1];
+                $("#div_" + deleteindex).remove();
+            }); 
+
+
+            $('.add').css('cursor', 'pointer');
+            
+
+        });
+    </script>
+</body>
+</html>

@@ -58,3 +58,27 @@ body h1 {
     align-items: center;
     flex-direction: column;
 }
+
+#addButton {
+    cursor: pointer;
+}
+
+select:required:invalid {
+    color: gray;
+}
+
+.recipeButton {
+    border-radius: 5px;
+    background-color: white;
+    color: #755514;
+    cursor: pointer;
+}
+
+.add {
+    text-decoration: underline;
+    color: green
+}
+
+.find {
+    text-align: center;
+}
