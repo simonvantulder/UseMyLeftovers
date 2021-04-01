@@ -47,8 +47,44 @@
             <button>Submit</button>
         </form>
         <div>
+            <p>
+                {{recipe_num.name}} <!-- print recipe name :) yum-->
+            </p>
+            <p> scored {{ratings}} % on rotten tomato</p> <!--currently displays as a decimal...for whatever reason cant convert to percentage in backend yet-->
 
-            {{recipe_num.instructions}} <!-- currently printing instructions object working on getting to print individual steps in a list-->
+
+
+
+            <img src="{{recipe_picture}}" alt="image of the {{recipe_num.name}} dish">
+            <p>{{servings}}</p>
+            <p>cook time: {{cook_time}}</p>
+            <p>total time: {{total_time}}</p>
+
+            <p>nutrition: </p>
+            {% for nutri, nut in nutrition.items %} <!--prints all the caloric information-->
+                {% if nutri == "calories" %}
+                <p>{{nutri}} {{nut}} </p>
+                {% else %}
+                    {% if nutri != "calories" %}
+                        {% if nutri != "updated_at" %} 
+                            <p>{{nutri}} {{nut}} g </p>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <p>{{ratings.score}} </p> <!--need to figure out how to ultiply this by 100-->
+            <p>
+                <a href="{{video}}">link to instruction video </a> {{video2.url}} <!--displays link for instructional video-->
+            </p>
+
+
+            <p>
+                {% for instruction in instructions %}
+                    <p>
+                        {{instruction.display_text}} <!-- loop through and print each instructions step -->
+                    </p>
+                {% endfor %}
+            </p>
         </div>
         <div>
             <ul>

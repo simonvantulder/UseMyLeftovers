@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from . models import *
 from . API import *
+import math
 
 def index(request):
     return redirect ("/login_page")
@@ -17,22 +18,31 @@ def dashboard(request):
 
 
 def find_dinner(request):
-    request.session["ideas"] = findByIngredientsTasty(request.POST)
+    request.session["ideas"] = findByIngredientsTasty(request.POST) #store API data in session
+    # print(findByIngredientsTasty(request.POST)) #used to troubleshoot navigating through the API dict
     # print(request.session["ideas"][1])
-    print(findByIngredientsTasty(request.POST))
-    # print(find_by_ingredients(request.POST))
 
     return redirect ("/make_dinner")
 
 
 def make_dinner(request):
-    idea = request.session['ideas']
-    # print(idea)
-    print(idea['results'])
+    idea = request.session['ideas'] #pull API data 
+    # print(idea['results'])
+    rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
+    ratings = round(rating_raw * 100)
+
     context = {
         "ideas" : idea['results'][0]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
-        "recipe_num" : idea['results'][0] #holds instructions object
-    
+        "recipe_num" : idea['results'][0], #holds all key value pairs 
+        "instructions" : idea['results'][0]['instructions'], #holds instructions object
+        "video" : idea['results'][0]['original_video_url'], #holds instruction video 
+        "recipe_picture" : idea['results'][0]['thumbnail_url'], #holds recipe image 
+        "servings" : idea['results'][0]['yields'], #number of servings in the recipe 
+        "cook_time" : idea['results'][0]['cook_time_minutes'], #total time on the stove and/or in the oven 
+        "total_time" : idea['results'][0]['total_time_minutes'], #total time start to finish to make the recipe 
+        "nutrition" : idea['results'][0]['nutrition'], #number of servings in the recipe 
+        "ratings" :  ratings #recipe rating 
+
     }
     return render (request, "dashboard.html", context)
 
