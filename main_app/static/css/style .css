@@ -97,3 +97,14 @@ table {
 .centered {
     text-align: center;
 }
+
+.recipePage {
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 40px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

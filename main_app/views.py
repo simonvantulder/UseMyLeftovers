@@ -11,6 +11,10 @@ def login_page(request):
     return render (request, "login_page.html")
 
 
+def home(request):
+    return render (request, 'kitchen.html')
+
+
 def dashboard(request):
     
     return render (request, "dashboard.html")
