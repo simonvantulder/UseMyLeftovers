@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from . models import *
 from . API import *
+import math
 
 def index(request):
     return redirect ("/login_page")
@@ -27,19 +28,20 @@ def find_dinner(request):
 def make_dinner(request):
     idea = request.session['ideas'] #pull API data 
     # print(idea['results'])
-    # ratings = idea['results'][0]['user_ratings']['score'][0], #number of servings in the recipe 
-    # print(int(ratings))
+    rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
+    ratings = round(rating_raw * 100)
+
     context = {
         "ideas" : idea['results'][0]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
         "recipe_num" : idea['results'][0], #holds all key value pairs 
         "instructions" : idea['results'][0]['instructions'], #holds instructions object
         "video" : idea['results'][0]['original_video_url'], #holds instruction video 
-        "recipe_picture" : idea['results'][0]['thumbnail_url'], #holds instruction video 
+        "recipe_picture" : idea['results'][0]['thumbnail_url'], #holds recipe image 
         "servings" : idea['results'][0]['yields'], #number of servings in the recipe 
-        "cook_time" : idea['results'][0]['cook_time_minutes'], #number of servings in the recipe 
-        "total_time" : idea['results'][0]['total_time_minutes'], #number of servings in the recipe 
+        "cook_time" : idea['results'][0]['cook_time_minutes'], #total time on the stove and/or in the oven 
+        "total_time" : idea['results'][0]['total_time_minutes'], #total time start to finish to make the recipe 
         "nutrition" : idea['results'][0]['nutrition'], #number of servings in the recipe 
-        "ratings" : idea['results'][0]['user_ratings'], #number of servings in the recipe 
+        "ratings" :  ratings #recipe rating 
 
     }
     return render (request, "dashboard.html", context)
