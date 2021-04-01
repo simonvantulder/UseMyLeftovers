@@ -16,7 +16,6 @@ header {
 body {
     margin: 25px;
     background-image: url(/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/img/kitchen.jpeg);
-
 }
 
 body h1 {
@@ -79,6 +78,22 @@ select:required:invalid {
     color: green
 }
 
-.find {
+
+.tableArea {
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 40px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    width: 90%;
+}
+
+.centered {
     text-align: center;
 }

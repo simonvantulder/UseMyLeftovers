@@ -7,29 +7,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/style .css">
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <title>Document</title>
+    <title>Recipe Wizard</title>
 </head>
 <body>
     
-        <header>
-            <button>Home</button>
-            <h1>Welcome {{ name }}</h1>
-            <span><button>Home</button><button>Logout</button></span>        
-        </header>
+    <header>
+        <button>Home</button>
+        <h1>Welcome {{ name }}</h1>
+        <span><button>Logout</button></span>        
+    </header>
+
     <div class="addSection">
         <div  class="addFood">
-            <h2 class="find">Find a Recipe</h2>
+            <h2 class="centered">Find a Recipe</h2>
             <form action="/find_dinner" method="POST">
                 {%csrf_token%}
 
-                <div class="form-group row"> <!-- input of desired total time in minutes-->
+                <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="time">How much time do you have?</label>
                     <div>
-                        <input class="form-control" placeholder="(Minutes)" type="number" name="time" step='10' >
+                        <input class="form-control" placeholder="(Minutes)" type="number" name="time" step='10' min="0">
                     </div>
                 </div>
 
-                <div class="form-group row"> <!-- input first ingredient currently required-->
+                <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a category</label>
                     <div>
                         <select required class="form-control" type="text" name="ingred1">
@@ -65,7 +66,7 @@
                 var max = 5;
                 if(ingredient_sum < max){
                     $(".ingredient:last").after("<div class='ingredient' id='div_"+ nextindex +"'></div><br>");
-                    $("#div_" + nextindex).append("<input type='text' class='form-control' name='ingredient' id='txt_"+ nextindex +"'>&nbsp;<span id='remove_" + nextindex + "' class='remove'> Delete </span>");
+                    $("#div_" + nextindex).append("<input type='text' class='form-control' name='ingredient' id='txt_"+ nextindex +"'>&nbsp;<span style='color:red; font-size:12px; cursor:pointer;' id='remove_" + nextindex + "' class='remove'> Delete </span>");
                 }
             });
 
