@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/style .css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />    
     <title>Ingredients</title>
 </head>
 <body>
@@ -16,7 +17,7 @@
     </header>
 
     <main class="tableArea">
-        <h2 class="centered">{{ Category }}</h2>
+        <h2 class="centered">{{ this_category.name }}</h2>
         <div class="table">
             <table class="table table-striped table table-bordered table-sm ">
                 <tr>
@@ -26,15 +27,14 @@
                     <th>Use/Sell by date</th>
                     <th></th>
                 </tr>
-
+                {% for ingredient in category.ingredients.all %}
                 <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
+                    <td>{{ingredient.name}}</td>
+                    <td>{{ingredient.quantity}}</td>
+                    <td>{{ingredient.created_at}}</td>
+                    <td>{{ingredient.expiration}}</td>
                 </tr>
-
+                {%endfor%}
 
             </table>
         </div>

@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/style .css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />    
     <title>Add Ingredient</title>
 </head>
 <header>
@@ -19,13 +20,19 @@
     <div class="addSection">
         <h2>Add an item to your pantry</h2>
         <div class="addFood">
-            <form action="" method="POST">
+            <form action="/ingredient_add" method="POST">
+                {% csrf_token %}
                 <div class="form-group row">
                     <label for="category" class="col-sm-4 col-form-label">Category:</label>
                     <div>
                         <select name="category" class="form-control" id="">
                             <option value="" disabled selected >Select food category</option>
-                            <option value=""></option>
+                            <option value="1">Meats</option>
+                            <option value="2">Fruits</option>
+                            <option value="3">Vegetables</option>
+                            <option value="4">Grains</option>
+                            <option value="6">Spices and Herbs</option>
+                            <option value="7">Dairy</option>
                         </select>
                     </div>
                 </div>
@@ -40,7 +47,7 @@
                 <div class="form-group row">
                     <label for="quantity" class="col-sm-4 col-form-label">Quantity:</label>
                     <div>
-                        <input type="number" class="form-control" name="" id="">
+                        <input type="number" class="form-control" name="quantity" id="">
                     </div>
                 </div>
 

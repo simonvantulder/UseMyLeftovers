@@ -1,0 +1,114 @@
+* {
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 25px;
+    padding: 15px;
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+}
+
+body {
+    margin: 25px;
+    background-image: url(/static/img/kitchen.jpeg);
+}
+
+body h1 {
+    text-align: center;
+}
+
+.panelsAll {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 25px;
+
+}
+
+.panel {
+    width: 25%;
+    height: auto;
+    border: solid 2px black;
+    border-radius: 10px;
+    margin: 20px;
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+    color: #755514;
+}
+
+.addFood {
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+    width: 75%;
+    padding: 25px;
+    margin: 25px;
+
+}
+
+.addSection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#addButton {
+    cursor: pointer;
+}
+
+select:required:invalid {
+    color: gray;
+}
+
+.recipeButton {
+    border-radius: 5px;
+    background-color: white;
+    color: #755514;
+    cursor: pointer;
+}
+
+.add {
+    color: green;
+}
+
+
+.tableArea {
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 40px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    width: 90%;
+}
+
+.centered {
+    text-align: center;
+}
+
+.recipePage {
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color: white;
+    padding: 40px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recipeImg {
+    height: 100px;
+    width: auto;
+}

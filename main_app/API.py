@@ -12,8 +12,8 @@ def findByIngredientsTasty(post_data):
     for ingredient in ingredient_list: #make one long string with commas between each item in ingredient_list
         ingredient_str += ingredient + ','
 
-    querystring = {"from":"0","size":"10","q":f"{post_data['ingred1']}, {post_data['ingred2']},"}
-    # querystring = {"from":"0","size":"10","tags":f"under_{post_data['time']}_minutes","q":f"{ingredient_str}"}
+    # querystring = {"from":"0","size":"10","tags": f"under_{post_data['time']}_minutes","q":f"{post_data['ingred1']}, {post_data['ingred2']},"}
+    querystring = {"from":"0","size":"10","q":f"{ingredient_str}"}
 
     headers = {
         'x-rapidapi-key': "65a692824dmsh49b9f7a37fd2cd8p14f76ajsn4af58bcbc980",

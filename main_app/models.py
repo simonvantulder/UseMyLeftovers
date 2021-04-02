@@ -55,3 +55,20 @@ class User(models.Model):
 
     def __str__(self):        
         return f"< {self.first_name} ({self.id})>"
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+    category = models.ForeignKey("Category", related_name = "ingredients", on_delete = models.CASCADE)
+    expiration = models.DateField(null = True)
+
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+

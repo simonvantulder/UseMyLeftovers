@@ -13,17 +13,35 @@ def login_page(request):
 
 
 def kitchen(request):
-    
-    return render (request, "kitchen.html")
 
+    context = {
+        "categories" : Category.objects.all(),
+        'user': User.objects.get(id = request.session['uuid']),
+    }
+    return render (request, "kitchen.html", context)
+
+
+def view_all(request, num):
+    this_category = Category.objects.get(id = num)
+    context = {
+        "category": Category.objects.get(id = num),
+        "ingredients" : Category.objects.get(id = num),
+    }
+    return render(request, "view_all.html", context)
 
 def home(request):
-    return render (request, 'kitchen.html')
+    context = {
+        "categories": Category.objects.all(),
+        'user': User.objects.get(id = request.session['uuid']),
+    }
+    return render (request, 'kitchen.html', context)
 
 
 def dashboard(request):
-    
-    return render(request, "dashboard.html")
+    context = {
+        "name" : User.objects.get(id = request.session['uuid'])
+    }
+    return render(request, "test_form.html")
 
 
 def find_dinner(request):
@@ -42,12 +60,12 @@ def make_dinner(request):
         context = {
             "no_search_results" : "No matching recipes"
         }
-        return render(request, "dashboard.html", context)
+        return render(request, "test_form.html", context)
     # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
     # ratings = round(rating_raw * 100)
 
     context = {
-        # "idea" : idea,
+        # "ideas" : idea,
         "count" : idea['count'],
         "recipe_list" : idea['results'], #holds all search results 
         "ideas" : idea['results'][9]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
@@ -63,7 +81,7 @@ def make_dinner(request):
         # "ratings" :  ratings #recipe rating 
 
     }
-    return render (request, "dashboard.html", context)
+    return render (request, "test_form.html", context)
 
 
 def make_dinner_num(request, num):
@@ -72,15 +90,15 @@ def make_dinner_num(request, num):
         context = {
             "no_search_results" : "No matching recipes"
         }
-        return render(request, "dashboard.html", context)
+        return render(request, "test_form.html", context)
     # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
     # ratings = round(rating_raw * 100)
 
     context = {
         "idea" : idea,
-
         "recipe_list" : idea['results'], #holds all search results 
         "cout" : idea['count'],
+
         "ideas" : idea['results'][num]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
         "recipe_num" : idea['results'][num], #holds all key value pairs 
         "instructions" : idea['results'][num]['instructions'], #holds instructions object
@@ -94,7 +112,7 @@ def make_dinner_num(request, num):
         # "ratings" :  ratings #recipe rating 
 
     }
-    return render (request, "dashboard.html", context)
+    return render (request, "test_form.html", context)
 
 
 def user_create(request):
@@ -114,12 +132,11 @@ def user_create(request):
             )
         request.session['uuid'] = user.id
 
-    return redirect ("/dashboard")
+    return redirect ("/home")
 
 
 def login(request):
     errors = User.objects.login_validator(request.POST)
-    # API.findByIngredients()
 
     if len(errors) > 0:
         for key, value in errors.items():
@@ -130,7 +147,26 @@ def login(request):
         user = user_list[0]
         request.session['uuid'] = user.id 
 
-        return redirect("/dashboard")
+        return redirect("/home")
+
+
+def add_ingredient_page(request):
+
+    return render(request, 'add_ingredient.html')
+
+
+def ingredient_add(request):
+    num = int(request.POST['category'])
+    ingredient = Ingredient.objects.create(
+        category = Category.objects.get(id = num),
+        name = request.POST['name'],
+        quantity = request.POST['quantity'],
+        expiration = request.POST['date'],
+    )
+    return redirect('/view_all/{}'.format(num))
+
+
+
 
 
 

@@ -12,7 +12,9 @@ urlpatterns = [
     path('make_dinner/recipe/<int:num>', views.make_dinner_num),
     path('user/register', views.user_create),
     path('login', views.login),
-
+    path('view_all/<int:num>', views.view_all),
+    path('add_ingredient', views.add_ingredient_page),
+    path('ingredient_add', views.ingredient_add),
 
 
     path('logout', views.logout),

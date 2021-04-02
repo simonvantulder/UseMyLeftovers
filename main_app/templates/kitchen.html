@@ -5,58 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/style .css">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />    
     <title>Kitchen</title>
 </head>
 <header>
-    <button>Meal Wizard</button>
-    <h1>Welcome {{ name }}</h1>
+    <button><a href="/dashboard">Meal Wizard</a></button>
+    <h1>Welcome {{ user.first_name }}</h1>
     <button><a href="/logout">Logout</a></button>
 </header>
 
 <body>
     <h1>My Kitchen</h1>
     <div class="panelsAll">
+        
+        {% for category in categories %}
         <div class="panel">
-            <h2>Meats</h2>
+            <h2>{{ category.name }}</h2>
             <button>
-                <a href="">View all</a>
+                <a href="view_all/{{ category.id }}">View all</a>
             </button>
             <button>
-                <a href="">Add item</a>
+                <a href="/add_ingredient">Add item</a>
             </button>
         </div>
+        {% endfor %}
+
+<!-- <div class="panel">
+            <h2>Meats</h2>
+            <button>
+                <a href="view_all/0">View all</a>
+            </button>
+            <button>
+                <a href="/add_ingredient">Add item</a>
+            </button>
+        </div>
+
+
         <div class="panel">
             <h2>Fruits</h2>
             <button>
-                <a href="">View all</a>
+                <a href="view_all/1">View all</a>
             </button>
             <button>
-                <a href="">Add item</a>
+                <a href="/add_ingredient">Add item</a>
             </button>
         </div>
         <div class="panel">
             <h2>Vegetables</h2>
             <button>
-                <a href="">View all</a>
+                <a href="view_all/2">View all</a>
             </button>
             <button>
-                <a href="">Add item</a>
+                <a href="/add_ingredient">Add item</a>
             </button>
         </div>
         <div class="panel">
             <h2>Grains</h2>
             <button>
-                <a href="">View all</a>
+                <a href="view_all/3">View all</a>
             </button>
             <button>
                 <a href="">Add item</a>
             </button>
         </div>
         <div class="panel">
-            <h2>Spices/Herbs</h2>
+            <h2>Spices & Herbs</h2>
             <button>
-                <a href="">View all</a>
+                <a href="view_all/4">View all</a>
             </button>
             <button>
                 <a href="">Add item</a>
@@ -65,12 +81,12 @@
         <div class="panel">
             <h2>Dairy</h2>
             <button>
-                <a href="">View all</a>
+                <a href="view_all/5">View all</a>
             </button>
             <button>
                 <a href="">Add item</a>
             </button>
-        </div>
+        </div> -->
 
 
 
