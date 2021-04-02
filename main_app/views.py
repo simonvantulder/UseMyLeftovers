@@ -16,7 +16,11 @@ def kitchen(request):
     
     return render (request, "kitchen.html")
 
-    
+
+def home(request):
+    return render (request, 'kitchen.html')
+
+
 def dashboard(request):
     
     return render(request, "dashboard.html")

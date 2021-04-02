@@ -12,9 +12,9 @@
 <body>
     
     <header>
-        <button>Home</button>
+        <button><a href="/home">Home</a></button>
         <h1>Welcome {{ name }}</h1>
-        <span><button>Logout</button></span>        
+        <span><button><a href="/logout">Logout</a></button></span>        
     </header>
 
     <div class="addSection">
@@ -55,6 +55,36 @@
             </form>
         <div>
     </div>
+
+    <div class="recipeList">
+        <div>
+            <div>
+                <img src="" alt=""> <h3>{{name}} - {{ time }}</h3>
+            </div>
+            <div>{{ description }}</div>
+        </div>
+
+        <div>
+            <div>
+                <img src="" alt=""> <h3>{{name}} - {{ time }}</h3>
+            </div>
+            <div>{{ description }}</div>
+        </div>
+
+        <div>
+            <div>
+                <img src="" alt=""> <h3>{{name}} - {{ time }}</h3>
+            </div>
+            <div>{{ description }}</div>
+        </div>
+
+    </div>
+
+
+
+
+
+
     <script>
         $(document).ready(function() {
 
