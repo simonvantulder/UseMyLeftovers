@@ -43,7 +43,7 @@ def make_dinner(request):
     # ratings = round(rating_raw * 100)
 
     context = {
-        "idea" : idea,
+        # "idea" : idea,
         "count" : idea['count'],
         "recipe_list" : idea['results'], #holds all search results 
         "ideas" : idea['results'][9]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
