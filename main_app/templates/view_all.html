@@ -11,13 +11,13 @@
 </head>
 <body>
     <header>
-        <button>Meal Wizard</button>
-        <h1>Welcome {{ name }}</h1>
+        <button><a href="/meal_wizard"></a>Meal Wizard</a></button>
+        <h1>Welcome {{ user.first_name }}</h1>
         <span><button><a href="/home">Home</a></button><button><a href="/logout">Logout</a></button></span>
     </header>
 
     <main class="tableArea">
-        <h2 class="centered">{{ this_category.name }}</h2>
+        <h2 class="centered">{{ category.name }}</h2>
         <div class="table">
             <table class="table table-striped table table-bordered table-sm ">
                 <tr>
@@ -25,7 +25,7 @@
                     <th>Quantity</th>
                     <th>Date added</th>
                     <th>Use/Sell by date</th>
-                    <th></th>
+                    <th>Actions</th>
                 </tr>
                 {% for ingredient in category.ingredients.all %}
                 <tr>
@@ -33,10 +33,12 @@
                     <td>{{ingredient.quantity}}</td>
                     <td>{{ingredient.created_at}}</td>
                     <td>{{ingredient.expiration}}</td>
+                    <td><a href="/make_dinner/{{ ingredient.id }}">Eat</a> | <a href="/delete/{{ ingredient.id }}">Delete</a></td>
                 </tr>
                 {%endfor%}
 
             </table>
+            <button><a href="/add_ingredient">Add another item</a></button>
         </div>
     </main>
 

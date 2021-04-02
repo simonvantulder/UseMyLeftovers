@@ -64,6 +64,18 @@
 
 
 
+        
+{% for i in counter %}
+<p>
+    test
+    {{recipe_list.i.name}}
+</p>
+<a href="/make_dinner/recipe/{{i}}"> Recipe #{{i}}</a><br> 
+{% endfor %}
+
+{%for item in recipe_list%}
+{{item.name}}
+{%endfor%}
 
 
         <div>

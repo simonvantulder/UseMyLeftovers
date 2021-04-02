@@ -12,7 +12,21 @@ header {
     border-radius: 10px;
     background-color: white;
 }
-
+.loginPage {
+    display: flex;
+    flex-direction: row;
+    margin: 50px 40px;
+    justify-content: space-evenly;
+}
+.loginButton{
+    margin-top: 10px;
+}
+.heading{
+    font-size: 40pt;
+    text-decoration: underline;
+    font-style: italic;
+    margin-bottom: 25px;
+}
 body {
     margin: 25px;
     background-image: url(/static/img/kitchen.jpeg);
@@ -111,4 +125,45 @@ table {
 .recipeImg {
     height: 100px;
     width: auto;
+}
+
+.recipeBoxes {
+    border-top: solid 2px black;
+    margin: 15px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    width: auto;
+}
+
+video {
+    width: 500px;
+    height: auto; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.kitchenHead {
+    width: 300px;
+    height: 75px;
+    border: solid 2px black;
+    border-radius: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+}
+
+button {
+    border-radius: 5px;
+    background-color: white;
+    color: #755514;
+    cursor: pointer;
 }

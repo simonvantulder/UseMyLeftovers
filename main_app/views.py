@@ -12,109 +12,6 @@ def login_page(request):
     return render (request, "login_page.html")
 
 
-def kitchen(request):
-
-    context = {
-        "categories" : Category.objects.all(),
-        'user': User.objects.get(id = request.session['uuid']),
-    }
-    return render (request, "kitchen.html", context)
-
-
-def view_all(request, num):
-    this_category = Category.objects.get(id = num)
-    context = {
-        "category": Category.objects.get(id = num),
-        "ingredients" : Category.objects.get(id = num),
-    }
-    return render(request, "view_all.html", context)
-
-def home(request):
-    context = {
-        "categories": Category.objects.all(),
-        'user': User.objects.get(id = request.session['uuid']),
-    }
-    return render (request, 'kitchen.html', context)
-
-
-def dashboard(request):
-    context = {
-        "name" : User.objects.get(id = request.session['uuid'])
-    }
-    return render(request, "test_form.html")
-
-
-def find_dinner(request):
-    request.session["ideas"] = findByIngredientsTasty(request.POST) #store API data in session
-    # print(findByIngredientsTasty(request.POST)) #used to troubleshoot navigating through the API dict
-    # print(request.session["ideas"][1])
-
-    return redirect ("/make_dinner")
-
-
-def make_dinner(request):
-    idea = request.session['ideas'] #pull API data 
-    # print(idea['results'])
-    print(idea['count'])
-    if idea["count"] == 0:
-        context = {
-            "no_search_results" : "No matching recipes"
-        }
-        return render(request, "test_form.html", context)
-    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
-    # ratings = round(rating_raw * 100)
-
-    context = {
-        # "ideas" : idea,
-        "count" : idea['count'],
-        "recipe_list" : idea['results'], #holds all search results 
-        "ideas" : idea['results'][9]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
-        "recipe_num" : idea['results'][9], #holds all key value pairs 
-        "instructions" : idea['results'][9]['instructions'], #holds instructions object
-        "video" : idea['results'][9]['original_video_url'], #holds instruction video 
-        "recipe_picture" : idea['results'][9]['thumbnail_url'], #holds recipe image 
-        "servings" : idea['results'][9]['yields'], #number of servings in the recipe 
-        "cook_time" : idea['results'][9]['cook_time_minutes'], #total time on the stove and/or in the oven 
-        "total_time" : idea['results'][9]['total_time_minutes'], #total time start to finish to make the recipe 
-        "nutrition" : idea['results'][9]['nutrition'], #number of servings in the recipe 
-        "description" : idea['results'][9]['description'], #descripton of the recipe 
-        # "ratings" :  ratings #recipe rating 
-
-    }
-    return render (request, "test_form.html", context)
-
-
-def make_dinner_num(request, num):
-    idea = request.session['ideas'] #pull API data 
-    if idea["count"] == 0:
-        context = {
-            "no_search_results" : "No matching recipes"
-        }
-        return render(request, "test_form.html", context)
-    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
-    # ratings = round(rating_raw * 100)
-
-    context = {
-        "idea" : idea,
-        "recipe_list" : idea['results'], #holds all search results 
-        "cout" : idea['count'],
-
-        "ideas" : idea['results'][num]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
-        "recipe_num" : idea['results'][num], #holds all key value pairs 
-        "instructions" : idea['results'][num]['instructions'], #holds instructions object
-        "video" : idea['results'][num]['original_video_url'], #holds instruction video 
-        "recipe_picture" : idea['results'][num]['thumbnail_url'], #holds recipe image 
-        "servings" : idea['results'][num]['yields'], #number of servings in the recipe 
-        "cook_time" : idea['results'][num]['cook_time_minutes'], #total time on the stove and/or in the oven 
-        "total_time" : idea['results'][num]['total_time_minutes'], #total time start to finish to make the recipe 
-        "nutrition" : idea['results'][num]['nutrition'], #number of servings in the recipe 
-        "description" : idea['results'][num]['description'], #descripton of the recipe 
-        # "ratings" :  ratings #recipe rating 
-
-    }
-    return render (request, "test_form.html", context)
-
-
 def user_create(request):
     errors = User.objects.validator(request.POST)
     
@@ -150,9 +47,132 @@ def login(request):
         return redirect("/home")
 
 
-def add_ingredient_page(request):
+def kitchen(request):
 
-    return render(request, 'add_ingredient.html')
+    context = {
+        "categories" : Category.objects.all(),
+        'user': User.objects.get(id = request.session['uuid']),
+    }
+    return render (request, "kitchen.html", context)
+
+
+def view_all(request, num):
+    this_category = Category.objects.get(id = num)
+    context = {
+        "category": Category.objects.get(id = num),
+        "ingredients" : Category.objects.get(id = num),
+        'user': User.objects.get(id = request.session['uuid']),
+    }
+    return render(request, "view_all.html", context)
+
+def home(request):
+    context = {
+        "categories": Category.objects.all(),
+        'user': User.objects.get(id = request.session['uuid']),
+    }
+    return render (request, 'kitchen.html', context)
+
+
+def find_dinner(request):
+    request.session["ideas"] = findByIngredientsTasty(request.POST) #store API data in session
+    # print(findByIngredientsTasty(request.POST)) #used to troubleshoot navigating through the API dict
+    # print(request.session["ideas"][1])
+
+    return redirect ("/make_dinner/results")
+
+
+def meal_wizard(request):    
+    return render (request, "test_form.html")
+
+def meal_wizard_leftovers(request, num):  
+    context = {
+        "ingredient" : Ingredient.objects.get(id = num)
+    }
+    return render (request, "test_form.html", context)
+
+
+def make_dinner_results(request):
+    idea = request.session['ideas'] #pull API data 
+    if idea["count"] == 0:
+        context = {
+            "no_search_results" : "No matching recipes",
+            'user': User.objects.get(id = request.session['uuid']),
+        }
+        return render(request, "test_form.html", context)
+        
+    arr =[]
+    display_arr = []
+    for x in range(len(idea["results"])):
+        arr.append(x)
+        display_arr.append(x+1)
+
+    print(len(idea["results"]))
+    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
+    # ratings = round(rating_raw * 100)
+
+    context = {
+        "idea" : idea,
+        "recipe_list" : idea['results'], #holds all search results 
+        "count" : idea['count'],
+        "counter" : arr,
+        'user': User.objects.get(id = request.session['uuid']),
+
+    }
+    return render (request, "test_form.html", context)
+
+
+def make_dinner_num(request, num):
+    idea = request.session['ideas'] #pull API data 
+    if idea["count"] == 0:
+        context = {
+            "no_search_results" : "No matching recipes",
+            'user': User.objects.get(id = request.session['uuid']),
+        }
+        return render(request, "test_form.html", context)
+        
+    arr =[]
+    display_arr = []
+    for x in range(len(idea["results"])):
+        arr.append(x)
+        display_arr.append(x+1)
+
+    print(len(idea["results"]))
+    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
+    # ratings = round(rating_raw * 100)
+
+    context = {
+        "idea" : idea,
+        "recipe_list" : idea['results'], #holds all search results 
+        "count" : idea['count'],
+        "counter" : arr,
+        'user': User.objects.get(id = request.session['uuid']),
+
+    }
+    return render (request, "test_form.html", context)
+
+
+def add_ingredient_page(request):
+    context = {
+        'user': User.objects.get(id = request.session['uuid']),
+    }
+
+    return render(request, 'add_ingredient.html', context)
+
+
+def recipe(request, num):
+    idea = request.session['ideas'] #pull API data 
+    print(idea)
+    this_recipe = find_by_id(num)
+    print(this_recipe)
+    rating_raw = this_recipe['name'] #recipe rating as decimal
+    rating_raw = this_recipe['user_ratings']['score'] #recipe rating as decimal
+    ratings = round(rating_raw * 100)
+    context = {
+        'user': User.objects.get(id = request.session['uuid']),
+        'recipe': this_recipe,
+
+    }
+    return render(request, 'recipe_info.html', context)
 
 
 def ingredient_add(request):
@@ -166,8 +186,11 @@ def ingredient_add(request):
     return redirect('/view_all/{}'.format(num))
 
 
-
-
+def delete(request, num):
+    item = Ingredient.objects.get(id=num)
+    number = item.category.id
+    item.delete()
+    return redirect('/view_all/{}'.format(number))
 
 
 def logout(request):

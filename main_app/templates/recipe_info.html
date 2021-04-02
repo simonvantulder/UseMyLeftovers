@@ -5,20 +5,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/Users/matthewpaxton/Desktop/Python/django/django_project/dinner_planner/main_app/static/css/style .css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />    
     <title>Recipe</title>
 </head>
 <body>
     <header>
-        <button>Meal Wizard</button>
-        <h1>Welcome {{ name }}</h1>
+        <button><a href="/meal_wizard">Meal Wizard</a></button>
+        <h1>Welcome {{ user.first_name }}</h1>
         <span><button><a href="/home">Home</a></button><button><a href="/logout">Logout</a></button></span>
     </header>
 
     <main>
         <div class="recipePage">
-            <h2 class="centered">{{ Recipe Name }}</h2>
+            <h1 class="centered heading">{{ recipe.name }}</h1>
+            <img src="{{ recipe.thumbnail_url }}" class="center" alt="">
 
+            {% if recipe.yields %}
+                <h4 class="centered"> {{ recipe.yields }}</h4>
+            {% endif %}
+
+            {% if recipe.cook_time_minutes %}
+                <h4 class="centered">Cook time: {{ recipe.cook_time_minutes }} minutes</h4>
+            {% endif %}
+
+            {% if recipe.total_time_minutes %}
+                <h4 class="centered">Total time: {{ recipe.total_time_minutes }} minutes</h4>
+            {% endif %}
+
+            {% if recipe.user_rating.score %}
+                <h4 class="centered">Scored {{ recipe.user_rating.score }}% on rotten tomato</h4>
+            {% endif %}
+            
+            <div>
+                <h3>Ingredients:</h3>
+                <ul>
+                    {% for item in recipe.sections.0.components %} <!-- for loop prints ingredients in recipe dictionary-->
+                    <li>
+                        
+                        {%if 0 < item.measurements.0.quantity|add:"0"%} <!-- displays only if quantity != 0 ie ingredient used as garnish or pinch of salt-->
+                        {{item.measurements.0.quantity}} 
+                        {%endif%}
+                        
+                        {%if 1 < item.measurements.0.quantity|add:"0"%} <!-- displays plural or singular word form of the measurement ie 1 cup vs 2 cups of cheese-->
+                        {{item.measurements.0.unit.display_plural}}
+                        {% else %}
+                        {{item.measurements.0.unit.name}}
+                        {%endif%}
+
+                        {{item.ingredient.name}} <!-- recipe is a dict of ingredients and their measurements inside ideas list-->
+                        {{extra_comment}}
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+            
+            <div>
+                <h3>Directions:</h3>
+                <ol>
+                    {% for instruction in recipe.instructions %}
+                        <li>{{instruction.display_text}}</li> <!-- loop through and print each instructions step -->
+                    {% endfor %}
+                </ol>
+            </div>
+
+            {% if recipe.original_video_url %}
+            <div> 
+                    <video controls>
+                        <source src="{{recipe.original_video_url}}" type="video/mp4">
+                    </video>
+            </div>
+            {% endif %}
         </div>
 
 

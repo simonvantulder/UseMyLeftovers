@@ -10,16 +10,17 @@
     <title>Add Ingredient</title>
 </head>
 <header>
-    <button>Meal Wizard</button>
-    <h1>Welcome {{ name }}</h1>
+    <button onclick="location.href='/meal_wizard'" role="link" data-href="/">Meal Wizard</button>
+    <h1>Welcome {{ user.first_name }}</h1>
     <span><button><a href="/home">Home</a></button><button><a href="/logout">Logout</a></button></span>
 </header>
 
 <body>
     
     <div class="addSection">
-        <h2>Add an item to your pantry</h2>
+        
         <div class="addFood">
+        <h2 class="centered">Add an item to your pantry</h2>
             <form action="/ingredient_add" method="POST">
                 {% csrf_token %}
                 <div class="form-group row">
@@ -58,9 +59,9 @@
                     </div>
                 </div>
 
-                <button>All done</button>
-                <button><a href="">Add another item</a></button>
-
+                <button>Add item</button>
+                
+                <!-- <button><a href="/add_another">Add another item</a></button> -->
             </form>
         </div>
     </div>

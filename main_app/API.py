@@ -4,16 +4,26 @@ import requests
 
 
 def findByIngredientsTasty(post_data):
-
     url = "https://tasty.p.rapidapi.com/recipes/list"
 
     ingredient_str = "" #setting up 
     ingredient_list = post_data.getlist('ingredient') #make a list out of the postdata ingredient fields (multiple fields have the same name from jquery appending)
     for ingredient in ingredient_list: #make one long string with commas between each item in ingredient_list
         ingredient_str += ingredient + ','
+    if post_data['category'] == '' and post_data['time'] == '':
+        querystring = {"from":"0","size":"5","q":f"{ingredient_str}"}
+    # if post_data['time'] == '':
+    #     querystring = {"from":"0","size":"5","q":f"{ingredient_str}"}
+    elif post_data['time'] == '':
+        querystring = {"from":"0","size":"6","tags": f"Mexican","q":f"{ingredient_str}"}
 
-    # querystring = {"from":"0","size":"10","tags": f"under_{post_data['time']}_minutes","q":f"{post_data['ingred1']}, {post_data['ingred2']},"}
-    querystring = {"from":"0","size":"10","q":f"{ingredient_str}"}
+    else:
+        print(post_data, "else statement")
+        
+        # querystring = {"from":"0","size":"50","tags": f"under_{post_data['time']}_minutes","q":f"{ingredient_str}"}
+        querystring = {"from":"0","size":"6","tags": f"under_30_minutes","q":f"{ingredient_str}"}
+
+#============================================================================================================================================================================================================
 
     headers = {
         'x-rapidapi-key': "65a692824dmsh49b9f7a37fd2cd8p14f76ajsn4af58bcbc980",
@@ -21,8 +31,25 @@ def findByIngredientsTasty(post_data):
         }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-    # print(response.json())
+    # print(response.text)
     return(response.json())
+
+def find_by_id(id):
+    url = "https://tasty.p.rapidapi.com/recipes/detail"
+
+    querystring = {"id":f"{id}"}
+
+    headers = {
+        'x-rapidapi-key': "65a692824dmsh49b9f7a37fd2cd8p14f76ajsn4af58bcbc980",
+        'x-rapidapi-host': "tasty.p.rapidapi.com"
+        }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    print(response.json)
+    return(response.json())
+
+
 
 def FindTags():
     conn = http.client.HTTPSConnection("tasty.p.rapidapi.com")
@@ -65,6 +92,6 @@ def findRecipe():
 
     response = requests.request("GET", url, headers=headers, params=querystring)
 
-    print(response.text)
+    # print(response.text)
     return(response.text)
 

@@ -10,13 +10,13 @@
     <title>Kitchen</title>
 </head>
 <header>
-    <button><a href="/dashboard">Meal Wizard</a></button>
+    <button><a href="/meal_wizard">Meal Wizard</a></button>
     <h1>Welcome {{ user.first_name }}</h1>
     <button><a href="/logout">Logout</a></button>
 </header>
 
 <body>
-    <h1>My Kitchen</h1>
+    <h1 class="kitchenHead">My Kitchen</h1>
     <div class="panelsAll">
         
         {% for category in categories %}
@@ -30,65 +30,6 @@
             </button>
         </div>
         {% endfor %}
-
-<!-- <div class="panel">
-            <h2>Meats</h2>
-            <button>
-                <a href="view_all/0">View all</a>
-            </button>
-            <button>
-                <a href="/add_ingredient">Add item</a>
-            </button>
-        </div>
-
-
-        <div class="panel">
-            <h2>Fruits</h2>
-            <button>
-                <a href="view_all/1">View all</a>
-            </button>
-            <button>
-                <a href="/add_ingredient">Add item</a>
-            </button>
-        </div>
-        <div class="panel">
-            <h2>Vegetables</h2>
-            <button>
-                <a href="view_all/2">View all</a>
-            </button>
-            <button>
-                <a href="/add_ingredient">Add item</a>
-            </button>
-        </div>
-        <div class="panel">
-            <h2>Grains</h2>
-            <button>
-                <a href="view_all/3">View all</a>
-            </button>
-            <button>
-                <a href="">Add item</a>
-            </button>
-        </div>
-        <div class="panel">
-            <h2>Spices & Herbs</h2>
-            <button>
-                <a href="view_all/4">View all</a>
-            </button>
-            <button>
-                <a href="">Add item</a>
-            </button>
-        </div>
-        <div class="panel">
-            <h2>Dairy</h2>
-            <button>
-                <a href="view_all/5">View all</a>
-            </button>
-            <button>
-                <a href="">Add item</a>
-            </button>
-        </div> -->
-
-
 
 
     </div>
