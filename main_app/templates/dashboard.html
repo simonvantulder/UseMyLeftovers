@@ -46,14 +46,33 @@
             
             <button>Submit</button>
         </form>
+
+{% for i in idea.results %}
+    <a href="/make_dinner/recipe/{{i}}">IT WORKS! recipe number {{i}}</a> 
+{% endfor %}
+
+<a href="/make_dinner/recipe/{{0}}"> recipe number 1</a> 
+<a href="/make_dinner/recipe/{{1}}"> recipe number 2</a> 
+<a href="/make_dinner/recipe/{{2}}"> recipe number 3</a> 
+<a href="/make_dinner/recipe/{{3}}"> recipe number 4</a> 
+<a href="/make_dinner/recipe/{{4}}"> recipe number 5</a> 
+<a href="/make_dinner/recipe/{{5}}"> recipe number 6</a> 
+<a href="/make_dinner/recipe/{{6}}"> recipe number 7</a> 
+<a href="/make_dinner/recipe/{{7}}"> recipe number 8</a> 
+<a href="/make_dinner/recipe/{{8}}"> recipe number 9</a> 
+<a href="/make_dinner/recipe/{{9}}"> recipe number 10</a> 
+
+
+
+
+
         <div>
             <p>
                 {{recipe_num.name}} <!-- print recipe name :) yum-->
             </p>
+            <p> {{no_search_results}}</p>
             <p> {{description}}</p>
             <p> scored {{ratings}} % on rotten tomato</p> <!--currently displays as a decimal...for whatever reason cant convert to percentage in backend yet-->
-
-
 
 
             <img src="{{recipe_picture}}" alt="image of the {{recipe_num.name}} dish">

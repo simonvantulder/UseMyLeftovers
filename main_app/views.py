@@ -12,9 +12,14 @@ def login_page(request):
     return render (request, "login_page.html")
 
 
+def kitchen(request):
+    
+    return render (request, "kitchen.html")
+
+    
 def dashboard(request):
     
-    return render (request, "dashboard.html")
+    return render(request, "dashboard.html")
 
 
 def find_dinner(request):
@@ -28,21 +33,61 @@ def find_dinner(request):
 def make_dinner(request):
     idea = request.session['ideas'] #pull API data 
     # print(idea['results'])
-    rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
-    ratings = round(rating_raw * 100)
+    print(idea['count'])
+    if idea["count"] == 0:
+        context = {
+            "no_search_results" : "No matching recipes"
+        }
+        return render(request, "dashboard.html", context)
+    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
+    # ratings = round(rating_raw * 100)
 
     context = {
-        "ideas" : idea['results'][0]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
-        "recipe_num" : idea['results'][0], #holds all key value pairs 
-        "instructions" : idea['results'][0]['instructions'], #holds instructions object
-        "video" : idea['results'][0]['original_video_url'], #holds instruction video 
-        "recipe_picture" : idea['results'][0]['thumbnail_url'], #holds recipe image 
-        "servings" : idea['results'][0]['yields'], #number of servings in the recipe 
-        "cook_time" : idea['results'][0]['cook_time_minutes'], #total time on the stove and/or in the oven 
-        "total_time" : idea['results'][0]['total_time_minutes'], #total time start to finish to make the recipe 
-        "nutrition" : idea['results'][0]['nutrition'], #number of servings in the recipe 
-        "description" : idea['results'][0]['description'], #descripton of the recipe 
-        "ratings" :  ratings #recipe rating 
+        "idea" : idea,
+        "count" : idea['count'],
+        "recipe_list" : idea['results'], #holds all search results 
+        "ideas" : idea['results'][9]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
+        "recipe_num" : idea['results'][9], #holds all key value pairs 
+        "instructions" : idea['results'][9]['instructions'], #holds instructions object
+        "video" : idea['results'][9]['original_video_url'], #holds instruction video 
+        "recipe_picture" : idea['results'][9]['thumbnail_url'], #holds recipe image 
+        "servings" : idea['results'][9]['yields'], #number of servings in the recipe 
+        "cook_time" : idea['results'][9]['cook_time_minutes'], #total time on the stove and/or in the oven 
+        "total_time" : idea['results'][9]['total_time_minutes'], #total time start to finish to make the recipe 
+        "nutrition" : idea['results'][9]['nutrition'], #number of servings in the recipe 
+        "description" : idea['results'][9]['description'], #descripton of the recipe 
+        # "ratings" :  ratings #recipe rating 
+
+    }
+    return render (request, "dashboard.html", context)
+
+
+def make_dinner_num(request, num):
+    idea = request.session['ideas'] #pull API data 
+    if idea["count"] == 0:
+        context = {
+            "no_search_results" : "No matching recipes"
+        }
+        return render(request, "dashboard.html", context)
+    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
+    # ratings = round(rating_raw * 100)
+
+    context = {
+        "idea" : idea,
+
+        "recipe_list" : idea['results'], #holds all search results 
+        "cout" : idea['count'],
+        "ideas" : idea['results'][num]['sections'][0]['components'], # componenets holds measurements etc other info on each ingredient
+        "recipe_num" : idea['results'][num], #holds all key value pairs 
+        "instructions" : idea['results'][num]['instructions'], #holds instructions object
+        "video" : idea['results'][num]['original_video_url'], #holds instruction video 
+        "recipe_picture" : idea['results'][num]['thumbnail_url'], #holds recipe image 
+        "servings" : idea['results'][num]['yields'], #number of servings in the recipe 
+        "cook_time" : idea['results'][num]['cook_time_minutes'], #total time on the stove and/or in the oven 
+        "total_time" : idea['results'][num]['total_time_minutes'], #total time start to finish to make the recipe 
+        "nutrition" : idea['results'][num]['nutrition'], #number of servings in the recipe 
+        "description" : idea['results'][num]['description'], #descripton of the recipe 
+        # "ratings" :  ratings #recipe rating 
 
     }
     return render (request, "dashboard.html", context)
