@@ -32,10 +32,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="ingred1">Choose an ethnicity</label>
+                    <label class="col-sm-4 col-form-label" for="ingred1">Choose a Culture</label>
                     <div>
                         <select required class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected value="">Ethnicity</option><!-- ie ethnicity -->
+                            <option value="">I'm uncultured (leave blank)</option>
                             <option value="brazilian">Brazilian</option>
                             <option value="carribean">Carribean</option>
                             <option value="chinese">Chinese</option>
@@ -60,6 +61,7 @@
                     <div>
                         <select required class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected value="">Holiday</option><!-- ie ethnicity -->
+                            <option value="">Leave Blank</option>
                             <option value="date_night">Date Night</option>
                             <option value="black_history_month">Black History Month</option>
                             <option value="christmas">Christmas</option>
@@ -78,6 +80,7 @@
                     <div>
                         <select required class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected value="">Category</option><!-- ie ethnicity -->
+                            <option value="">leave blank</option>
                             <option value="one_pot_or_pan">One-Pot or Pan</option>
                             <option value="instant_pot">Instant Pot</option>
                             <option value="slow_cooker">Slow Cooker</option>
@@ -94,6 +97,7 @@
                     <div>
                         <select required class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected value="">Allergy</option><!-- ie ethnicity -->
+                            <option value="">leave blank</option>
                             <option value="gluten_free">Vegetarian</option>
                             <option value="vegan">Vegan</option>
                             <option value="pescatarian">Pescatarian</option>
@@ -121,11 +125,11 @@
     </div>
 
     <div class="recipeList">
-        {% for item in recipe_list %}
+        {% for item in idea.results %}
         <div class="recipeBoxes">
                 <h4><a href="/recipe/{{ item.id }}">{{item.name}}</a></h4>
                 <img class="recipeImg" src="{{ item.thumbnail_url }}" alt="image of {{ item.name }}">
-                <span>{{ item.description }}</span>
+                <h6> Description: {{ item.description }}</h6>
         </div>
         {% endfor %}
     </div>

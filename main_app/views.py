@@ -93,28 +93,28 @@ def meal_wizard_leftovers(request, num):
 
 def make_dinner_results(request):
     idea = request.session['ideas'] #pull API data 
-    if idea["count"] == 0:
-        context = {
-            "no_search_results" : "No matching recipes",
-            'user': User.objects.get(id = request.session['uuid']),
-        }
-        return render(request, "test_form.html", context)
+    # if idea["count"] == 0:
+    #     context = {
+    #         "no_search_results" : "No matching recipes",
+    #         'user': User.objects.get(id = request.session['uuid']),
+    #     }
+    #     return render(request, "test_form.html", context)
         
-    arr =[]
-    display_arr = []
-    for x in range(len(idea["results"])):
-        arr.append(x)
-        display_arr.append(x+1)
+    # arr =[]
+    # display_arr = []
+    # for x in range(len(idea["results"])):
+    #     arr.append(x)
+    #     display_arr.append(x+1)
 
-    print(len(idea["results"]))
+    # print(len(idea["results"]))
     # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
     # ratings = round(rating_raw * 100)
 
     context = {
         "idea" : idea,
-        "recipe_list" : idea['results'], #holds all search results 
-        "count" : idea['count'],
-        "counter" : arr,
+        # "recipe_list" : idea['results'], #holds all search results 
+        # "count" : idea['count'],
+        # "counter" : arr,
         'user': User.objects.get(id = request.session['uuid']),
 
     }

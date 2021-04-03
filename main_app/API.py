@@ -10,18 +10,24 @@ def findByIngredientsTasty(post_data):
     ingredient_list = post_data.getlist('ingredient') #make a list out of the postdata ingredient fields (multiple fields have the same name from jquery appending)
     for ingredient in ingredient_list: #make one long string with commas between each item in ingredient_list
         ingredient_str += ingredient + ','
-    if post_data['category'] == '' and post_data['time'] == '':
+
+    category_str = "" #setting up 
+    category_list = post_data.getlist('category') #make a list out of the postdata category fields (multiple fields have the same name from jquery appending)
+    for category in category_list: #make one long string with commas between each item in category_list
+        category_str += category + ','
+    if category_str == '' and post_data['time'] == '':
         querystring = {"from":"0","size":"5","q":f"{ingredient_str}"}
-    # if post_data['time'] == '':
-    #     querystring = {"from":"0","size":"5","q":f"{ingredient_str}"}
+        print("if statement")
+
     elif post_data['time'] == '':
-        querystring = {"from":"0","size":"6","tags": f"Mexican","q":f"{ingredient_str}"}
+        querystring = {"from":"0","size":"6","tags": f"{category_str}","q":f"{ingredient_str}"}
+        print("elif statement")
 
     else:
-        print(post_data, "else statement")
+        print("else statement")
         
         # querystring = {"from":"0","size":"50","tags": f"under_{post_data['time']}_minutes","q":f"{ingredient_str}"}
-        querystring = {"from":"0","size":"6","tags": f"under_30_minutes","q":f"{ingredient_str}"}
+        querystring = {"from":"0","size":"5","tags": f"under_{post_data['time']}_minutes","q":f"{ingredient_str}"}
 
 #============================================================================================================================================================================================================
 
