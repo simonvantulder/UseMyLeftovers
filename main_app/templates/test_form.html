@@ -35,7 +35,7 @@
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Culture</label>
                     <div>
                         <select required class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected value="">Ethnicity</option><!-- ie ethnicity -->
+                            <option class="form-control" disabled selected >Ethnicity</option><!-- ie ethnicity -->
                             <option value="">I'm uncultured (leave blank)</option>
                             <option value="brazilian">Brazilian</option>
                             <option value="carribean">Carribean</option>
@@ -60,8 +60,7 @@
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose Date Night or a Holiday</label>
                     <div>
                         <select required class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected value="">Holiday</option><!-- ie ethnicity -->
-                            <option value="">Leave Blank</option>
+                            <option class="form-control" disabled selected>Holiday</option><!-- ie ethnicity -->
                             <option value="date_night">Date Night</option>
                             <option value="black_history_month">Black History Month</option>
                             <option value="christmas">Christmas</option>
@@ -78,7 +77,7 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Category</label>
                     <div>
-                        <select required class="form-control" type="text" name="category">
+                        <select class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected value="">Category</option><!-- ie ethnicity -->
                             <option value="">leave blank</option>
                             <option value="one_pot_or_pan">One-Pot or Pan</option>
@@ -95,7 +94,7 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Dietary Restriction</label>
                     <div>
-                        <select required class="form-control" type="text" name="category">
+                        <select class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected value="">Allergy</option><!-- ie ethnicity -->
                             <option value="">leave blank</option>
                             <option value="gluten_free">Vegetarian</option>
@@ -123,7 +122,11 @@
             </form>
         <div>
     </div>
-
+    <div>
+        {% if not idea.results %}
+        <h4 class="centered">Sorry, there are no matching recipes in our database</h4>
+        {% endif %} 
+    </div>
     <div class="recipeList">
         {% for item in idea.results %}
         <div class="recipeBoxes">
