@@ -164,9 +164,9 @@ def recipe(request, num):
     print(idea)
     this_recipe = find_by_id(num)
     print(this_recipe)
-    rating_raw = this_recipe['name'] #recipe rating as decimal
-    rating_raw = this_recipe['user_ratings']['score'] #recipe rating as decimal
-    ratings = round(rating_raw * 100)
+    # rating_raw = this_recipe['name'] #recipe rating as decimal
+    # rating_raw = this_recipe['user_ratings']['score'] #recipe rating as decimal
+    # ratings = round(rating_raw * 100)
     context = {
         'user': User.objects.get(id = request.session['uuid']),
         'recipe': this_recipe,
