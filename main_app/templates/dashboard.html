@@ -17,27 +17,27 @@
         <h2>Find a Recipe</h2>
         <form action="/find_dinner" method="post">
             {%csrf_token%}
-            <div class="form-group row"> <!-- input of desired total time in minutes-->
+            <div class="form-group row"> <!-- input of desired total time in minutes not required-->
                 <label class="col-sm-4 col-form-label" for="time">time</label>
                 <div>
                     <input class="form-control" type="text" name="time">
                 </div>
             </div>
-            <div class="form-group row"> <!-- input first ingredient currently required-->
+            <div class="form-group row"> <!-- input first ingredient not required-->
                 <label class="col-sm-4 col-form-label" for="ingred1">ingredient 1</label>
                 <div>
                     <input class="form-control" type="text" name="ingred1">
                 </div>
             </div>
 
-            <div class="form-group row"> <!-- input second ingredient currently required-->
+            <div class="form-group row"> <!-- input second ingredient not required-->
                 <label class="col-sm-4 col-form-label" for="ingred2">ingredient 2</label>
                 <div>
                     <input class="form-control" type="text" name="ingred2">
                 </div>
             </div>
 
-            <div class="form-group row"> <!-- input third ingredient currently required-->
+            <div class="form-group row"> <!-- input third ingredient not required-->
                 <label class="col-sm-4 col-form-label" for="ingred3">ingredient 3</label>
                 <div>
                     <input class="form-control" type="text" name="ingred3">
@@ -47,35 +47,6 @@
             <button>Submit</button>
         </form>
 
-{% for i in idea.results %}
-    <a href="/make_dinner/recipe/{{i}}">IT WORKS! recipe number {{i}}</a> 
-{% endfor %}
-
-<a href="/make_dinner/recipe/{{0}}"> recipe number 1</a> 
-<a href="/make_dinner/recipe/{{1}}"> recipe number 2</a> 
-<a href="/make_dinner/recipe/{{2}}"> recipe number 3</a> 
-<a href="/make_dinner/recipe/{{3}}"> recipe number 4</a> 
-<a href="/make_dinner/recipe/{{4}}"> recipe number 5</a> 
-<a href="/make_dinner/recipe/{{5}}"> recipe number 6</a> 
-<a href="/make_dinner/recipe/{{6}}"> recipe number 7</a> 
-<a href="/make_dinner/recipe/{{7}}"> recipe number 8</a> 
-<a href="/make_dinner/recipe/{{8}}"> recipe number 9</a> 
-<a href="/make_dinner/recipe/{{9}}"> recipe number 10</a> 
-
-
-
-        
-{% for i in counter %}
-<p>
-    test
-    {{recipe_list.i.name}}
-</p>
-<a href="/make_dinner/recipe/{{i}}"> Recipe #{{i}}</a><br> 
-{% endfor %}
-
-{%for item in recipe_list%}
-{{item.name}}
-{%endfor%}
 
 
         <div>
@@ -105,8 +76,9 @@
                 {% endif %}
             {% endfor %}
             <p>{{ratings.score}} </p> <!--need to figure out how to ultiply this by 100-->
-            <p>
-                <a href="{{video}}">link to instruction video </a> {{video2.url}} <!--displays link for instructional video-->
+            <p><!--displays video & link for instructional video-->
+                <a href="{{video}}">link to instruction video </a> 
+                {{video2.url}} 
             </p>
 
 

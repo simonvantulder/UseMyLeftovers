@@ -66,7 +66,10 @@ class Category(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.IntegerField()
+    # organize ingredients by category
     category = models.ForeignKey("Category", related_name = "ingredients", on_delete = models.CASCADE)
+    # assign ingredients to a user's pantry
+    chef = models.ForeignKey("User", related_name = "ingredients", null = True, on_delete = models.CASCADE)
     expiration = models.DateField(null = True)
 
     created_at=models.DateTimeField(auto_now_add=True)

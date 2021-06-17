@@ -57,10 +57,10 @@ def kitchen(request):
 
 
 def view_all(request, num):
-    this_category = Category.objects.get(id = num)
+    ingredients_in_category = Ingredient.objects.filter(category = num).order_by("expiration")
     context = {
         "category": Category.objects.get(id = num),
-        "ingredients" : Category.objects.get(id = num),
+        "ingredients" : ingredients_in_category,
         'user': User.objects.get(id = request.session['uuid']),
     }
     return render(request, "view_all.html", context)
@@ -82,43 +82,23 @@ def find_dinner(request):
 
 
 def meal_wizard(request):    
-    return render (request, "test_form.html")
+    return render (request, "find_recipe_form.html")
 
 def meal_wizard_leftovers(request, num):  
     context = {
         "ingredient" : Ingredient.objects.get(id = num)
     }
-    return render (request, "test_form.html", context)
+    return render (request, "find_recipe_form.html", context)
 
-
+#
 def make_dinner_results(request):
     idea = request.session['ideas'] #pull API data 
-    # if idea["count"] == 0:
-    #     context = {
-    #         "no_search_results" : "No matching recipes",
-    #         'user': User.objects.get(id = request.session['uuid']),
-    #     }
-    #     return render(request, "test_form.html", context)
-        
-    # arr =[]
-    # display_arr = []
-    # for x in range(len(idea["results"])):
-    #     arr.append(x)
-    #     display_arr.append(x+1)
-
-    # print(len(idea["results"]))
-    # rating_raw = idea['results'][0]['user_ratings']['score'] #number of servings in the recipe 
-    # ratings = round(rating_raw * 100)
 
     context = {
         "idea" : idea,
-        # "recipe_list" : idea['results'], #holds all search results 
-        # "count" : idea['count'],
-        # "counter" : arr,
         'user': User.objects.get(id = request.session['uuid']),
-
     }
-    return render (request, "test_form.html", context)
+    return render (request, "find_recipe_form.html", context)
 
 
 def make_dinner_num(request, num):
@@ -128,7 +108,7 @@ def make_dinner_num(request, num):
             "no_search_results" : "No matching recipes",
             'user': User.objects.get(id = request.session['uuid']),
         }
-        return render(request, "test_form.html", context)
+        return render(request, "find_recipe_form.html", context)
         
     arr =[]
     display_arr = []
@@ -148,7 +128,8 @@ def make_dinner_num(request, num):
         'user': User.objects.get(id = request.session['uuid']),
 
     }
-    return render (request, "test_form.html", context)
+    return render (request, "find_recipe_form.html", context)
+
 
 
 def add_ingredient_page(request):
@@ -164,9 +145,10 @@ def recipe(request, num):
     print(idea)
     this_recipe = find_by_id(num)
     print(this_recipe)
-    rating_raw = this_recipe['name'] #recipe rating as decimal
-    rating_raw = this_recipe['user_ratings']['score'] #recipe rating as decimal
-    ratings = round(rating_raw * 100)
+    # ratings not available for all recipes, therefore presently left out
+        # rating_raw = this_recipe['name'] #recipe rating as decimal
+        # rating_raw = this_recipe['user_ratings']['score'] #recipe rating as decimal
+        # ratings = round(rating_raw * 100)
     context = {
         'user': User.objects.get(id = request.session['uuid']),
         'recipe': this_recipe,
@@ -177,11 +159,12 @@ def recipe(request, num):
 
 def ingredient_add(request):
     num = int(request.POST['category'])
-    ingredient = Ingredient.objects.create(
+    Ingredient.objects.create(
         category = Category.objects.get(id = num),
         name = request.POST['name'],
         quantity = request.POST['quantity'],
         expiration = request.POST['date'],
+        chef = User.objects.get(id = request.session['uuid']),
     )
     return redirect('/view_all/{}'.format(num))
 
