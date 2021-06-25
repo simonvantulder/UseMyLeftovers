@@ -28,13 +28,15 @@
                     <th>Actions</th>
                 </tr>
                 {% for ingredient in category.ingredients.all %}
-                <tr>
-                    <td>{{ingredient.name}}</td>
-                    <td>{{ingredient.quantity}}</td>
-                    <td>{{ingredient.created_at}}</td>
-                    <td>{{ingredient.expiration}}</td>
-                    <td><a href="/make_dinner/{{ ingredient.id }}">Eat</a> | <a href="/delete/{{ ingredient.id }}">Delete</a></td>
-                </tr>
+                    {% if ingredient.chef == user %}
+                    <tr>
+                        <td>{{ingredient.name}}</td>
+                        <td>{{ingredient.quantity}} {{ingredient.unit}}</td>
+                        <td>{{ingredient.created_at}}</td>
+                        <td>{{ingredient.expiration}}</td>
+                        <td><a href="/make_dinner/{{ ingredient.id }}">Eat</a> | <a href="/delete/{{ ingredient.id }}">Delete</a></td>
+                    </tr>
+                    {%endif%}
                 {%endfor%}
 
             </table>

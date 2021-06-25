@@ -66,11 +66,16 @@ class Category(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.IntegerField()
+    # null = true, example 10 apples are their own unit
+    unit = models.CharField(max_length=25, null = True)
+
+    # allow expiration to be optional 
+    # ie some dry good have Very long shelf lives, impractical to put in
+    expiration = models.DateField(null = True) 
     # organize ingredients by category
     category = models.ForeignKey("Category", related_name = "ingredients", on_delete = models.CASCADE)
     # assign ingredients to a user's pantry
     chef = models.ForeignKey("User", related_name = "ingredients", null = True, on_delete = models.CASCADE)
-    expiration = models.DateField(null = True)
 
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

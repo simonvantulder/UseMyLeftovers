@@ -53,6 +53,21 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="unit" class="col-sm-4 col-form-label">Unit:</label>
+                    <div>
+                        <select name="unit" class="form-control" id="">
+                            <option value="" disabled selected >Select Unit</option>
+                            <option value="unit">unit</option>
+                            <option value="head(s)">head(s)</option>
+                            <option value="bag(s)">bag(s)</option>
+                            <option value="box(es)">box(es)</option>
+                            <option value="ounce(s)">ounce(s)</option>
+                            <option value="pound(s)">pound(s)</option>
+                        </select>                    
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="date" class="col-sm-4 col-form-label">Use/Sell by date:</label>
                     <div>
                         <input type="date" class="form-control" name="date" id="">
@@ -61,7 +76,6 @@
 
                 <button>Add item</button>
                 
-                <!-- <button><a href="/add_another">Add another item</a></button> -->
             </form>
         </div>
     </div>
