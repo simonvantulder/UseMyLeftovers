@@ -9,6 +9,6 @@
 ![](./ReadME_images/View_My_Fruits.png)
 ![](./ReadME_images/View_My_Meats.png)
 ![](./ReadME_images/View_My_Vegetables.png)
-![](./ReadME_images/Get_Greek_Cucumber_Recipes.png)
+![](./ReadME_images/Get_Greek_Chicken_Cucumber_Recipes.png)
 ![](./ReadME_images/Get_Korean_Recipes.png)
 
