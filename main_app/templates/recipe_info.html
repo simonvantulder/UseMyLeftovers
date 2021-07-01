@@ -21,19 +21,19 @@
             <h1 class="centered heading">{{ recipe.name }}</h1>
             <img src="{{ recipe.thumbnail_url }}" class="center" alt="">
 
-            {% if recipe.yields %}
+            {% if recipe.yields %} <!-- display num servings if it exists-->
                 <h4 class="centered"> {{ recipe.yields }}</h4>
             {% endif %}
 
-            {% if recipe.cook_time_minutes %}
+            {% if recipe.cook_time_minutes %} <!-- display cook time if it exists-->
                 <h4 class="centered">Cook time: {{ recipe.cook_time_minutes }} minutes</h4>
             {% endif %}
 
-            {% if recipe.total_time_minutes %}
+            {% if recipe.total_time_minutes %} <!-- display total time if it exists-->
                 <h4 class="centered">Total time: {{ recipe.total_time_minutes }} minutes</h4>
             {% endif %}
 
-            {% if recipe.user_rating.score %}
+            {% if recipe.user_rating.score %} <!-- display recipe rating if it exists-->
                 <h4 class="centered">Scored {{ recipe.user_rating.score }}% on rotten tomato</h4>
             {% endif %}
             

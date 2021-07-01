@@ -24,6 +24,7 @@
             <form action="/find_dinner" method="POST">
                 {%csrf_token%}
 
+                <!-- choose categories to filter results. note adding a time really limits the results down - frequently to none -->
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="time">How much time do you have?</label>
                     <div>
@@ -36,9 +37,7 @@
                     <div>
                         <select required class="form-control" type="text" name="category">
                             <option class="form-control" disabled selected >Ethnicity</option><!-- ie ethnicity -->
-                            <option value="">I'm uncultured (leave blank)</option>
                             <option value="brazilian">Brazilian</option>
-                            <option value="carribean">Carribean</option>
                             <option value="chinese">Chinese</option>
                             <option value="french">French</option>
                             <option value="german">German</option>
@@ -60,7 +59,7 @@
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose Date Night or a Holiday</label>
                     <div>
                         <select required class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected>Holiday</option><!-- ie ethnicity -->
+                            <option class="form-control" disabled selected>Holiday</option>
                             <option value="date_night">Date Night</option>
                             <option value="black_history_month">Black History Month</option>
                             <option value="christmas">Christmas</option>
@@ -78,7 +77,7 @@
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Category</label>
                     <div>
                         <select class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected>Category</option><!-- ie ethnicity -->
+                            <option class="form-control" disabled selected>Category</option>
                             <option value="drinks">Drinks</option>
                             <option value="one_pot_or_pan">One-Pot or Pan</option>
                             <option value="instant_pot">Instant Pot</option>
@@ -95,7 +94,7 @@
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Dietary Restriction</label>
                     <div>
                         <select class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected>Allergy</option><!-- ie ethnicity -->
+                            <option class="form-control" disabled selected>Allergy</option>
                             <option value="gluten_free">Vegetarian</option>
                             <option value="vegan">Vegan</option>
                             <option value="pescatarian">Pescatarian</option>
@@ -136,11 +135,6 @@
         </div>
         {% endfor %}
     </div>
-
-
-
-
-
 
     <script>
         $(document).ready(function() {

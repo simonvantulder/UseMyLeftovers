@@ -42,6 +42,19 @@ class UserManager(models.Manager):
         return errors
 
 
+# validate ingredient submission
+def ingredient_validator(self, post_data):
+    errors = {}
+
+    #all errors are strings
+    if len(post_data['category']) < 3:
+        errors['category'] = "Must enter a food category"
+    if len(post_data['name']) < 1:
+        errors['name'] = "Must enter an ingredient"
+    if (post_data['expiration']) < 1:
+        errors['expiration'] = "Must enter an amount"
+    if (post_data['quantity']) < 1:
+        errors['quantity'] = "Must enter an amount"
 
 class User(models.Model):
     first_name = models.CharField(max_length=100)
@@ -66,8 +79,16 @@ class Category(models.Model):
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
     quantity = models.IntegerField()
+    # null = true, example 10 apples are their own unit
+    unit = models.CharField(max_length=25, null = True)
+
+    # allow expiration to be optional 
+    # ie some dry good have Very long shelf lives, impractical to put in
+    expiration = models.DateField(null = True) 
+    # organize ingredients by category
     category = models.ForeignKey("Category", related_name = "ingredients", on_delete = models.CASCADE)
-    expiration = models.DateField(null = True)
+    # assign ingredients to a user's pantry
+    chef = models.ForeignKey("User", related_name = "ingredients", null = True, on_delete = models.CASCADE)
 
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
