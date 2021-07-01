@@ -4,34 +4,36 @@ from . models import *
 from . API import *
 import math
 
+
 def index(request):
-    return redirect ("/login_page")
+    return redirect("/login_page")
 
 
 # display login page
 def login_page(request):
-    return render (request, "login_page.html")
+    return render(request, "login_page.html")
 
 
 # handle registration, valiadtion & password hashing
 def user_create(request):
     errors = User.objects.validator(request.POST)
-    
+
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
         return redirect("/")
     else:
-        hash_browns = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
+        hash_browns = bcrypt.hashpw(
+            request.POST['password'].encode(), bcrypt.gensalt()).decode()
         user = User.objects.create(
-            first_name = request.POST["first_name"],
-            last_name = request.POST["last_name"],
-            email = request.POST["email"],
-            password = hash_browns,
+            first_name=request.POST["first_name"],
+            last_name=request.POST["last_name"],
+            email=request.POST["email"],
+            password=hash_browns,
             )
         request.session['uuid'] = user.id
 
-    return redirect ("/home")
+    return redirect("/home")
 
 
 # handle login validation
@@ -43,25 +45,30 @@ def login(request):
             messages.error(request, value)
         return redirect("/")
     else:
-        user_list = User.objects.filter(email = request.POST['email'])
+        user_list = User.objects.filter(email=request.POST['email'])
         user = user_list[0]
-        request.session['uuid'] = user.id 
+        request.session['uuid'] = user.id
 
         return redirect("/home")
 
 
 # display pantry categories
 def kitchen(request):
+    if 'uuid' not in request.session:
+        return redirect("/")
 
     context = {
-        "categories" : Category.objects.all(),
-        'user': User.objects.get(id = request.session['uuid']),
+        "categories": Category.objects.all(),
+        'user': User.objects.get(id=request.session['uuid']),
     }
-    return render (request, "kitchen.html", context)
+    return render(request, "kitchen.html", context)
 
 
 # display ingredients in category
 def view_all(request, num):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     this_category = Category.objects.get(id = num)
     ingredients_in_category = Ingredient.objects.all().filter(category = this_category).order_by("expiration")
     
@@ -75,6 +82,9 @@ def view_all(request, num):
 
 # display home page
 def home(request):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     context = {
         "categories": Category.objects.all(),
         'user': User.objects.get(id = request.session['uuid']),
@@ -84,6 +94,9 @@ def home(request):
 
 # search API for recipes
 def find_dinner(request):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     request.session["ideas"] = findByIngredientsTasty(request.POST) #store API data in session
     # print(findByIngredientsTasty(request.POST)) #used to troubleshoot navigating through the API dict
     # print(request.session["ideas"][1])
@@ -92,12 +105,18 @@ def find_dinner(request):
 
 
 # display meal wizard page with empty ingredient fields
-def meal_wizard(request):    
+def meal_wizard(request): 
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     return render (request, "find_recipe_form.html")
 
 
 # display meal wizard with selected ingredient autopopulated
 def meal_wizard_leftovers(request, num):  
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     context = {
         "ingredient" : Ingredient.objects.get(id = num)
     }
@@ -106,6 +125,9 @@ def meal_wizard_leftovers(request, num):
 
 # display results from recipe search
 def make_dinner_results(request):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     idea = request.session['ideas'] #pull API data 
 
     context = {
@@ -117,6 +139,9 @@ def make_dinner_results(request):
 
 # display individual recipe
 def make_dinner_num(request, num):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     idea = request.session['ideas'] #pull API data 
     if idea["count"] == 0:
         context = {
@@ -148,6 +173,9 @@ def make_dinner_num(request, num):
 
 # display form to add an ingredient to pantry/db
 def ingredient_add(request):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     context = {
         'user': User.objects.get(id = request.session['uuid']),
     }
@@ -156,6 +184,9 @@ def ingredient_add(request):
 
 
 def ingredient_add_in_category(request, num):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     context = {
         'user': User.objects.get(id = request.session['uuid']),
         'category': Category.objects.get(id = num)
@@ -166,6 +197,9 @@ def ingredient_add_in_category(request, num):
 
 # display recipe
 def recipe(request, num):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     idea = request.session['ideas'] #pull API data 
     print(idea)
     this_recipe = find_by_id(num)
@@ -184,6 +218,9 @@ def recipe(request, num):
 
 # add ingredient to pantry/database
 def ingredient_create(request):
+    if 'uuid' not in request.session:
+        return redirect("/")
+
     num = int(request.POST['category'])
     Ingredient.objects.create(
         category = Category.objects.get(id = num),
@@ -198,6 +235,9 @@ def ingredient_create(request):
 
 # delete item from db
 def delete(request, num):
+    if 'uuid' not in request.session:
+        return redirect("/")
+        
     item = Ingredient.objects.get(id=num)
     number = item.category.id
     item.delete()
