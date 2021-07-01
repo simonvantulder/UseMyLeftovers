@@ -11,15 +11,21 @@
 </head>
 <body>
     <header>
-        <button><a href="/meal_wizard"></a>Meal Wizard</a></button>
+        <button
+            onclick="location.href='/meal_wizard'"
+            role="link"
+            data-href="/"
+        >
+            Meal Wizard
+        </button>
         <h1>Welcome {{ user.first_name }}</h1>
         <span><button><a href="/home">Home</a></button><button><a href="/logout">Logout</a></button></span>
     </header>
 
     <main class="tableArea">
         <h2 class="centered">{{ category.name }}</h2>
-        <div class="table ">
-            <table class="table table-striped table table-bordered table-sm ">
+        <!-- <div class="panel panel-default "> -->
+            <table class=" table-curved table-striped table table-bordered centered table-md ">
                 <tr>
                     <th>Ingredient</th>
                     <th>Quantity</th>
@@ -27,7 +33,8 @@
                     <th>Use/Freeze by date</th>
                     <th>Actions</th>
                 </tr>
-                {% for ingredient in category.ingredients.all %}
+                
+                {% for ingredient in ingredients %}
                     {% if ingredient.chef == user %}
                     <tr>
                         <td>{{ingredient.name}}</td>
@@ -40,8 +47,8 @@
                 {%endfor%}
 
             </table>
-            <button><a href="/ingredient_add/{{ category.id }}">Add another item</a></button>
-        </div>
+        <!-- </div> -->
+            <button ><a href="/ingredient_add/{{ category.id }}">Add another item</a></button>
     </main>
 
 

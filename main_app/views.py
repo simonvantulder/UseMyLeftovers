@@ -60,13 +60,14 @@ def kitchen(request):
     return render (request, "kitchen.html", context)
 
 
-# display ingredeients in category
+# display ingredients in category
 def view_all(request, num):
     this_category = Category.objects.get(id = num)
-    ingredients_in_category = Ingredient.objects.filter(category = this_category).order_by("expiration")
+    ingredients_in_category = Ingredient.objects.all().filter(category = this_category).order_by("expiration")
+    
     context = {
         "category": Category.objects.get(id = num),
-        # "ingredients" : ingredients_in_category,
+        "ingredients" : ingredients_in_category,
         'user': User.objects.get(id = request.session['uuid']),
     }
     return render(request, "view_all.html", context)

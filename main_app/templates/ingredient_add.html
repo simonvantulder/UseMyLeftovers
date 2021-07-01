@@ -1,87 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}" />    
-    <title>Add Ingredient</title>
-</head>
-<header>
-    <button onclick="location.href='/meal_wizard'" role="link" data-href="/">Meal Wizard</button>
-    <h1>Welcome {{ user.first_name }}</h1>
-    <span><button><a href="/home">Home</a></button><button><a href="/logout">Logout</a></button></span>
-</header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}" />
+        <title>Add Ingredient</title>
+    </head>
+    <header>
+        <button
+            onclick="location.href='/meal_wizard'"
+            role="link"
+            data-href="/"
+        >
+            Meal Wizard
+        </button>
+        <h1>Welcome {{ user.first_name }}</h1>
+        <span
+            ><button><a href="/home">Home</a></button
+            ><button><a href="/logout">Logout</a></button></span
+        >
+    </header>
 
-<body>
-    
-    <div class="addSection">
-        
-        <div class="addFood">
-        <h2 class="centered">Add an item to your pantry</h2>
-            <form action="/ingredient_create" method="POST">
-                {% csrf_token %}
-                <div class="form-group row">
-                    <label for="category" class="col-sm-4 col-form-label">Category:</label>
-                    <div>
-                        <select name="category" class="form-control" id="">
-                            {% if category %}
-                                <option value="{{category.id}}">{{category.name}}</option>
+    <body>
+        <div class="addSection">
+            <div class="addFood">
+                <h2 class="centered">Add an item to your pantry</h2>
+                <form action="/ingredient_create" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="category" class="col-sm-4 col-form-label"
+                            >Category:</label
+                        >
+                        <div>
+                            <select name="category" class="form-control" id="">
+                                {% if category %}
+                                <option value="{{category.id}}">
+                                    {{category.name}}
+                                </option>
                                 {%else%}
-                                    <option value="" disabled selected >  Select food category</option>
-                            {% endif %}
-                            <option value="1">Meats</option>
-                            <option value="2">Fruits</option>
-                            <option value="3">Vegetables</option>
-                            <option value="4">Grains</option>
-                            <option value="6">Spices and Herbs</option>
-                            <option value="7">Dairy</option>
-                        </select>
+                                <option value="" disabled selected>
+                                    Select food category
+                                </option>
+                                {% endif %}
+                                <option value="1">Meats</option>
+                                <option value="2">Fruits</option>
+                                <option value="3">Vegetables</option>
+                                <option value="4">Grains</option>
+                                <option value="6">Spices and Herbs</option>
+                                <option value="7">Dairy</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="name" class="col-sm-4 col-form-label">Food name:</label>
-                    <div>
-                        <input type="text" class="form-control" name="name" >
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-4 col-form-label"
+                            >Food name:</label
+                        >
+                        <div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="name"
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="quantity" class="col-sm-4 col-form-label">Quantity:</label>
-                    <div>
-                        <input type="number" class="form-control" name="quantity" id="">
+                    <div class="form-group row">
+                        <label for="quantity" class="col-sm-4 col-form-label"
+                            >Quantity:</label
+                        >
+                        <div>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="quantity"
+                                id=""
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="unit" class="col-sm-4 col-form-label">Unit:</label>
-                    <div>
-                        <select name="unit" class="form-control" id="">
-                            <option value=" " selected >Select Unit</option>
-                            <option value="head(s)">head(s)</option>
-                            <option value="bag(s)">bag(s)</option>
-                            <option value="box(es)">box(es)</option>
-                            <option value="ounce(s)">ounce(s)</option>
-                            <option value="pound(s)">pound(s)</option>
-                        </select>                    
+                    <div class="form-group row">
+                        <label for="unit" class="col-sm-4 col-form-label"
+                            >Unit:</label
+                        >
+                        <div>
+                            <select name="unit" class="form-control" id="">
+                                <option value=" " selected>Select Unit</option>
+                                <option value="head(s)">head(s)</option>
+                                <option value="bag(s)">bag(s)</option>
+                                <option value="box(es)">box(es)</option>
+                                <option value="ounce(s)">ounce(s)</option>
+                                <option value="pound(s)">pound(s)</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="date" class="col-sm-4 col-form-label">Use/Sell by date:</label>
-                    <div>
-                        <input type="date" class="form-control" name="date" id="">
+                    <div class="form-group row">
+                        <label for="date" class="col-sm-4 col-form-label"
+                            >Use/Sell by date:</label
+                        >
+                        <div>
+                            <input
+                                type="date"
+                                class="form-control"
+                                name="date"
+                                id=""
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <button>Add item</button>
-                
-            </form>
+                    <button>Add item</button>
+                </form>
+            </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
