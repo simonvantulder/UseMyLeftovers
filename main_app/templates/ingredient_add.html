@@ -21,13 +21,17 @@
         
         <div class="addFood">
         <h2 class="centered">Add an item to your pantry</h2>
-            <form action="/ingredient_add" method="POST">
+            <form action="/ingredient_create" method="POST">
                 {% csrf_token %}
                 <div class="form-group row">
                     <label for="category" class="col-sm-4 col-form-label">Category:</label>
                     <div>
                         <select name="category" class="form-control" id="">
-                            <option value="" disabled selected >Select food category</option>
+                            {% if category %}
+                                <option value="{{category.id}}">{{category.name}}</option>
+                                {%else%}
+                                    <option value="" disabled selected >  Select food category</option>
+                            {% endif %}
                             <option value="1">Meats</option>
                             <option value="2">Fruits</option>
                             <option value="3">Vegetables</option>
@@ -56,8 +60,7 @@
                     <label for="unit" class="col-sm-4 col-form-label">Unit:</label>
                     <div>
                         <select name="unit" class="form-control" id="">
-                            <option value="" disabled selected >Select Unit</option>
-                            <option value="unit">unit</option>
+                            <option value=" " selected >Select Unit</option>
                             <option value="head(s)">head(s)</option>
                             <option value="bag(s)">bag(s)</option>
                             <option value="box(es)">box(es)</option>

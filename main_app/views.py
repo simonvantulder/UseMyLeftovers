@@ -146,12 +146,21 @@ def make_dinner_num(request, num):
 
 
 # display form to add an ingredient to pantry/db
-def add_ingredient_page(request):
+def ingredient_add(request):
     context = {
         'user': User.objects.get(id = request.session['uuid']),
     }
 
-    return render(request, 'add_ingredient.html', context)
+    return render(request, 'ingredient_add.html', context)
+
+
+def ingredient_add_in_category(request, num):
+    context = {
+        'user': User.objects.get(id = request.session['uuid']),
+        'category': Category.objects.get(id = num)
+    }
+
+    return render(request, 'ingredient_add.html', context)
 
 
 # display recipe
@@ -173,7 +182,7 @@ def recipe(request, num):
 
 
 # add ingredient to pantry/database
-def ingredient_add(request):
+def ingredient_create(request):
     num = int(request.POST['category'])
     Ingredient.objects.create(
         category = Category.objects.get(id = num),

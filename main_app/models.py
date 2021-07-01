@@ -42,6 +42,19 @@ class UserManager(models.Manager):
         return errors
 
 
+# validate ingredient submission
+def ingredient_validator(self, post_data):
+    errors = {}
+
+    #all errors are strings
+    if len(post_data['category']) < 3:
+        errors['category'] = "Must enter a food category"
+    if len(post_data['name']) < 1:
+        errors['name'] = "Must enter an ingredient"
+    if (post_data['expiration']) < 1:
+        errors['expiration'] = "Must enter an amount"
+    if (post_data['quantity']) < 1:
+        errors['quantity'] = "Must enter an amount"
 
 class User(models.Model):
     first_name = models.CharField(max_length=100)
