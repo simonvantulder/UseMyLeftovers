@@ -15,18 +15,14 @@
         <title>Add Ingredient</title>
     </head>
     <header>
-        <button
-            onclick="location.href='/meal_wizard'"
-            role="link"
-            data-href="/"
-        >
+        <button onclick="location.href='/meal_wizard'" role="link" data-href="/">
             Meal Wizard
         </button>
         <h1>Welcome {{ user.first_name }}</h1>
-        <span
-            ><button><a href="/home">Home</a></button
-            ><button><a href="/logout">Logout</a></button></span
-        >
+        <span> 
+            <button><a href="/home">Home</a></button> 
+            <button><a href="/logout">Logout</a></button>
+        </span>
     </header>
 
     <body>
@@ -36,9 +32,7 @@
                 <form action="/ingredient_create" method="POST">
                     {% csrf_token %}
                     <div class="form-group row">
-                        <label for="category" class="col-sm-4 col-form-label"
-                            >Category:</label
-                        >
+                        <label for="category" class="col-sm-4 col-form-label">Category:</label>
                         <div>
                             <select name="category" class="form-control" id="">
                                 {% if category %}
@@ -61,37 +55,17 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="name" class="col-sm-4 col-form-label"
-                            >Food name:</label
-                        >
-                        <div>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="name"
-                            />
-                        </div>
+                        <label for="name" class="col-sm-4 col-form-label">Food name:</label>
+                        <input type="text" class="form-control" name="name"/>
                     </div>
 
                     <div class="form-group row">
-                        <label for="quantity" class="col-sm-4 col-form-label"
-                            >Quantity:</label
-                        >
-                        <div>
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="quantity"
-                                id=""
-                            />
-                        </div>
+                        <label for="quantity" class="col-sm-4 col-form-label">Quantity:</label>
+                        <input type="number" class="form-control" name="quantity" id=""/>
                     </div>
 
                     <div class="form-group row">
-                        <label for="unit" class="col-sm-4 col-form-label"
-                            >Unit:</label
-                        >
-                        <div>
+                        <label for="unit" class="col-sm-4 col-form-label">Unit:</label>
                             <select name="unit" class="form-control" id="">
                                 <option value=" " selected>Select Unit</option>
                                 <option value="head(s)">head(s)</option>
@@ -103,21 +77,11 @@
                                 <option value="half-gallon(s)">half-gallon(s)</option>
                                 <option value="gallon(s)">gallon(s)</option>
                             </select>
-                        </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="date" class="col-sm-4 col-form-label"
-                            >Use/Sell by date:</label
-                        >
-                        <div>
-                            <input
-                                type="date"
-                                class="form-control"
-                                name="date"
-                                id=""
-                            />
-                        </div>
+                        <label for="date" class="col-sm-4 col-form-label">Use/Sell by date:</label>
+                        <input type="date" class="form-control" name="date" id=""/>
                     </div>
 
                     <button>Add item</button>
