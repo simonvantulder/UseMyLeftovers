@@ -15,7 +15,9 @@
     <header>
         <button><a href="/home">Home</a></button>
         <h1>Welcome {{ user.first_name }}</h1>
-        <span><button><a href="/logout">Logout</a></button></span>        
+        <span>
+            <button><a href="/logout">Logout</a></button>
+        </span>        
     </header>
 
     <div class="addSection">
@@ -27,83 +29,73 @@
                 <!-- choose categories to filter results. note adding a time really limits the results down - frequently to none -->
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="time">How much time do you have?</label>
-                    <div>
                         <input class="form-control" placeholder="(Minutes)" type="number" name="time" step='15' min="0">
-                    </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Culture</label>
-                    <div>
-                        <select required class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected >Ethnicity</option><!-- ie ethnicity -->
-                            <option value="brazilian">Brazilian</option>
-                            <option value="chinese">Chinese</option>
-                            <option value="french">French</option>
-                            <option value="german">German</option>
-                            <option value="greek">Greek</option>
-                            <option value="indian">Indian</option>
-                            <option value="italian">Italian</option>
-                            <option value="korean">Korean</option>
-                            <option value="latin_american">Latin American</option>
-                            <option value="mexican">Mexican</option>
-                            <option value="middle_eastern">Middle Eastern</option>
-                            <option value="japanese">Japanese</option>
-                            <option value="thai">Thai</option>
-                            <option value="vietnamese">Vietnamese</option>
-                        </select>
-                    </div>
+                    <select required class="form-control" type="text" name="category">
+                        <option class="form-control" disabled selected >Ethnicity</option><!-- ie ethnicity -->
+                        <option value="brazilian">Brazilian</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="french">French</option>
+                        <option value="german">German</option>
+                        <option value="greek">Greek</option>
+                        <option value="indian">Indian</option>
+                        <option value="italian">Italian</option>
+                        <option value="korean">Korean</option>
+                        <option value="latin_american">Latin American</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="middle_eastern">Middle Eastern</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="thai">Thai</option>
+                        <option value="vietnamese">Vietnamese</option>
+                    </select>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose Date Night or a Holiday</label>
-                    <div>
-                        <select required class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected>Holiday</option>
-                            <option value="date_night">Date Night</option>
-                            <option value="black_history_month">Black History Month</option>
-                            <option value="christmas">Christmas</option>
-                            <option value="easter">Easter</option>
-                            <option value="tasty_holiday_hanukkah">Hannukah</option>
-                            <option value="passover">Passover</option>
-                            <option value="lunar_new_year">Lunar New Year</option>
-                            <option value="halloween">Halloween</option>
-                            <option value="thanksgiving">Thanksgiving</option>
+                    <select required class="form-control" type="text" name="category">
+                        <option class="form-control" disabled selected>Holiday</option>
+                        <option value="date_night">Date Night</option>
+                        <option value="black_history_month">Black History Month</option>
+                        <option value="christmas">Christmas</option>
+                        <option value="easter">Easter</option>
+                        <option value="tasty_holiday_hanukkah">Hannukah</option>
+                        <option value="passover">Passover</option>
+                        <option value="lunar_new_year">Lunar New Year</option>
+                        <option value="halloween">Halloween</option>
+                        <option value="thanksgiving">Thanksgiving</option>
 
-                        </select>
-                    </div>
+                    </select>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Category</label>
-                    <div>
-                        <select class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected>Category</option>
-                            <option value="drinks">Drinks</option>
-                            <option value="one_pot_or_pan">One-Pot or Pan</option>
-                            <option value="instant_pot">Instant Pot</option>
-                            <option value="slow_cooker">Slow Cooker</option>
-                            <option value="kid_friendly">Kid-Friendly</option>
-                            <option value="bbq">BBQ</option>
-                            <option value="seafood">Seafood</option>
+                    <select class="form-control" type="text" name="category">
+                        <option class="form-control" disabled selected>Category</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="one_pot_or_pan">One-Pot or Pan</option>
+                        <option value="instant_pot">Instant Pot</option>
+                        <option value="slow_cooker">Slow Cooker</option>
+                        <option value="kid_friendly">Kid-Friendly</option>
+                        <option value="bbq">BBQ</option>
+                        <option value="seafood">Seafood</option>
 
-                        </select>
-                    </div>
+                    </select>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="ingred1">Choose a Dietary Restriction</label>
-                    <div>
-                        <select class="form-control" type="text" name="category">
-                            <option class="form-control" disabled selected>Allergy</option>
-                            <option value="gluten_free">Vegetarian</option>
-                            <option value="vegan">Vegan</option>
-                            <option value="pescatarian">Pescatarian</option>
-                            <option value="gluten_free">Gluten-Free</option>
-                            <option value="dairy_free">Dairy-Free</option>
-                            <option value="low_carb">Low-Carb</option>
-                            <option value="kid_friendly">Kid-Friendly</option>
-                        </select>
-                    </div>
+                    <select class="form-control" type="text" name="category">
+                        <option class="form-control" disabled selected>Allergy</option>
+                        <option value="gluten_free">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="pescatarian">Pescatarian</option>
+                        <option value="gluten_free">Gluten-Free</option>
+                        <option value="dairy_free">Dairy-Free</option>
+                        <option value="low_carb">Low-Carb</option>
+                        <option value="kid_friendly">Kid-Friendly</option>
+                    </select>
                 </div>
 
                 <fieldset class="form-group">
